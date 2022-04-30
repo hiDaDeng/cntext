@@ -65,16 +65,21 @@ As far as we know, cntext is the only Python package that provides **semantic pr
 
 ## built-in dictionary
 
-```python
+$$
+\usepackage{listings}
+\begin{lstlisting}[language=Python]
 import cntext as ct
-
 # get the list of built-in dictionary pkl
 ct.dict_pkl_list()
-```
+\end{lstlisting}
+$$
+
 
 Run
 
-```
+$$
+\usepackage{listings}
+\begin{lstlisting}
 ['DUTIR.pkl',
  'HOWNET.pkl',
  'sentiws.pkl',
@@ -87,7 +92,10 @@ Run
  'AFINN.pkl',
  'ADV_CONJ.pkl',
  'LoughranMcDonald.pkl']
-```
+\end{lstlisting}
+$$
+
+
 
 We list 12 pkl dictionary here, some of English dictionary listed below are organized from [quanteda.sentiment](https://github.com/quanteda/quanteda.sentiment)
 
@@ -107,28 +115,40 @@ We list 12 pkl dictionary here, some of English dictionary listed below are orga
 
 load the pkl dictionary file
 
-```python
+
+$$
+\usepackage{listings}
+\begin{lstlisting}[language=Python]
 import cntext as ct
 
 print(ct.load_pkl_dict('NRC.pkl'))
-```
+\end{lstlisting}
+$$
+
 
 Run
 
-```
+
+$$
+\usepackage{listings}
+\begin{lstlisting}
 {'NRC': {'anger': ['abandoned', 'abandonment', 'abhor', 'abhorrent', ...],
          'anticipation': ['accompaniment','achievement','acquiring', ...],
          'disgust': ['abject', 'abortion', 'abundance', 'abuse', ...],
          'fear': ['anxiety', 'anxious', 'apache', 'appalling', ...],
          ......
          }
-```
+\end{lstlisting}
+$$
+
 
 
 
 ## Sentiment analysis
 
-```python
+$$
+\usepackage{listings}
+\begin{lstlisting}[language=Python]
 import cntext as ct
 
 text = 'What a happy day!'
@@ -136,11 +156,17 @@ text = 'What a happy day!'
 ct.sentiment(text=text,
              diction=ct.load_pkl_dict('NRC.pkl')['NRC'],
              lang='english')
-```
+\end{lstlisting}
+$$
+
+
 
 Run
 
-```
+
+$$
+\usepackage{listings}
+\begin{lstlisting}
 {'anger_num': 0,
  'anticipation_num': 1,
  'disgust_num': 0,
@@ -154,13 +180,22 @@ Run
  'stopword_num': 1,
  'word_num': 5,
  'sentence_num': 1}
+\end{lstlisting}
+$$
+
+
+```
+
 ```
 
 
 
 ## Train Word2Vec
 
-```python
+
+$$
+\usepackage{listings}
+\begin{lstlisting}[language=Python]
 import cntext as ct
 import os
 
@@ -168,13 +203,19 @@ import os
 model = ct.W2VModels(cwd=os.getcwd(), 
                      lang='english')  
 model.train(input_txt_file='data/w2v_corpus.txt')
-```
+\end{lstlisting}
+$$
+
+
+
 
 
 
 ## semantic distance
 
-```python
+$$
+\usepackage{listings}
+\begin{lstlisting}[language=Python]
 import cntext as ct
 
 #Note: this is a word2vec format model
@@ -187,13 +228,20 @@ womans = ["woman", "she", "her"]
 tm.sematic_distance(words=animals, 
                     c_words1=mans, 
                     c_words2=womans)
-```
+\end{lstlisting}
+$$
 
 Run
 
-```
+
+$$
+\usepackage{listings}
+\begin{lstlisting}
 -0.38
-```
+\end{lstlisting}
+$$
+
+
 
 0.38 means that in semantic space, engineer is closer to man, other than woman.
 
@@ -201,7 +249,10 @@ Run
 
 ## semantic projection
 
-```python
+
+$$
+\usepackage{listings}
+\begin{lstlisting}[language=Python]
 animals = ['mouse', 'cat', 'horse',  'pig', 'whale']
 smalls = ["small", "little", "tiny"]
 bigs = ["large", "big", "huge"]
@@ -209,17 +260,22 @@ bigs = ["large", "big", "huge"]
 tm.sematic_projection(words=animals, 
                       c_words1=smalls, 
                       c_words2=bigs)
-```
+\end{lstlisting}
+$$
 
 Run
 
-```
+$$
+\usepackage{listings}
+\begin{lstlisting}
 [('mouse', -1.68),
  ('cat', -0.92),
  ('pig', -0.46),
  ('whale', -0.24),
  ('horse', 0.4)]
-```
+\end{lstlisting}
+$$
+
 
 In size conception, mouse is smallest, horse is biggest.
 
