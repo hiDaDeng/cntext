@@ -55,7 +55,7 @@ Compared with the dictionary-based method, word-embedding based method has more 
 
 
 
-As far as we know, cntext is the only Python package that provides semantic projection. For instance, to recover the similarities in size among nouns in a certain category (e.g., animals), we project their representations onto the line that extends from the word-vector 𝑠𝑚𝑎𝑙𝑙 to the word-vector 𝑏𝚤𝑔; and to order them according to how dangerous they are, we project them onto the line connecting 𝑠𝑎𝑓𝑒 and 𝑑𝑎𝑛𝑔𝑒𝑟𝑜𝑢𝑠 [Grand2022SemanticPR].
+As far as we know, cntext is the only Python package that provides **semantic projection**. For instance, to recover the similarities in size among nouns in a certain category (e.g., animals), we project their representations onto the line that extends from the word-vector **small** to the word-vector **big**; and to order them according to how dangerous they are, we project them onto the line connecting **safe** and **dangerous** [Grand2022SemanticPR].
 
 
 
@@ -91,19 +91,19 @@ Run
 
 We list 12 pkl dictionary here, some of English dictionary listed below are organized from [quanteda.sentiment](https://github.com/quanteda/quanteda.sentiment)
 
-| Built-in file                               | Dictionary                                                   | Lanuage         | 功能                                                         |
-| ------------------------------------------- | ------------------------------------------------------------ | --------------- | ------------------------------------------------------------ |
-| DUTIR.pkl                                   | DUTIR                                                        | Chinese         | Seven categories of emotions                                 |
-| HOWNET.pkl                                  | Hownet                                                       | Chinese         | Positive、Negative                                           |
-| sentiws.pkl                                 | SentimentWortschatz (SentiWS)                                | English         | Positive、Negative；<br>Valence                              |
-| ChineseFinancialFormalUnformalSentiment.pkl | Chinese finance dictionary, contains formal、unformal、positive、negative | Chinese         | formal-pos、<br>formal-neg；<br>unformal-pos、<br>unformal-neg |
-| ANEW.pkl                                    | Affective Norms for English Words (ANEW)                     | English         | Valence                                                      |
-| LSD2015.pkl                                 | Lexicoder Sentiment Dictionary (2015)                        | English         | Positive、Negative                                           |
-| NRC.pkl                                     | NRC Word-Emotion Association Lexicon                         | English         | fine-grained sentiment words;                                |
-| HuLiu.pkl                                   | Hu&Liu (2004)                                                | English         | Positive、Negative                                           |
-| AFINN.pkl                                   | ANEW                                                         | English         | valence                                                      |
-| LoughranMcDonald.pkl                        | Accounting Finance LM Dictionary                             | English         | Positive and Negative emotion words in the financial field   |
-| STOPWORDS.pkl                               |                                                              | English&Chinese | stopwordlist                                                 |
+| Built-in file                               | Dictionary                                                   | Lanuage         | Function                                                      |
+| ------------------------------------------- | ------------------------------------------------------------ | --------------- | ----------------------------------------------------------- |
+| DUTIR.pkl                                   | DUTIR                                                        | Chinese         | Seven categories of emotions                                |
+| HOWNET.pkl                                  | Hownet                                                       | Chinese         | Positive,Negative                                           |
+| sentiws.pkl                                 | SentimentWortschatz (SentiWS)                                | English         | Positive,Negative;<br>Valence                               |
+| ChineseFinancialFormalUnformalSentiment.pkl | Chinese finance dictionary, contains formal,unformal,positive,negative | Chinese         | formal-pos,<br>formal-neg;<br>unformal-pos,<br>unformal-neg |
+| ANEW.pkl                                    | Affective Norms for English Words (ANEW)                     | English         | Valence                                                     |
+| LSD2015.pkl                                 | Lexicoder Sentiment Dictionary (2015)                        | English         | Positive,Negative                                           |
+| NRC.pkl                                     | NRC Word-Emotion Association Lexicon                         | English         | fine-grained sentiment words;                               |
+| HuLiu.pkl                                   | Hu&Liu (2004)                                                | English         | Positive,Negative                                           |
+| AFINN.pkl                                   | ANEW                                                         | English         | valence                                                     |
+| LoughranMcDonald.pkl                        | Accounting Finance LM Dictionary                             | English         | Positive and Negative emotion words in the financial field  |
+| STOPWORDS.pkl                               |                                                              | English&Chinese | stopwordlist                                                |
 
 load the pkl dictionary file
 
