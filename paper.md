@@ -59,7 +59,34 @@ As far as we know, cntext is the only Python package that provides **semantic pr
 
 
 
+# Features
 
+Functional modules include
+
+-  **stats.py** basic text information
+
+  -  word count
+  -  readability
+  -  built-in dictionary
+  -  sentiment analysis
+
+-  **dictionary.py** build and extend dictionary(vocabulary)
+
+  -  throught Sopmi(mutual information) algorithm
+  -  expand dictionary throught Word2Vec algorithm
+
+-  **similarity.py** document similarity
+
+  -  cosine algorithm
+  -  jaccard algorithm
+  -  edit distance algorithm
+
+-  **mind.py** digest cognitive(attitude、bias etc.) information
+
+  -  tm.semantic_distance
+  -  tm.semantic_projection
+
+  
 
 # Exmaples
 ## semantic distance
