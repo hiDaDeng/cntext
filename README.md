@@ -602,6 +602,10 @@ If d1-d2<0，it means in semantic space,  between man and woman, software_engine
 
 In other words, there is a stereotype (bias) of women for software engineers in this corpus.
 
+[download glove_w2v.6B.100d.txt from google Driver](https://drive.google.com/file/d/1tuQB9PDx42z67ScEQrg650aDTYPz-elJ/view?usp=sharing) 
+
+
+
 ```python
 import cntext as ct
 

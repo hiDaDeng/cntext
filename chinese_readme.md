@@ -597,19 +597,21 @@ Run
 
 例如
 
+```
 male_concept = ['male', 'man', 'he', 'him']
-
 female_concept = ['female', 'woman', 'she', 'her']
-
 software_engineer_concept  = ['engineer',  'programming',  'software']
-
 d1 = distance(male_concept,  software_engineer_concept)
-
 d2 = distance(female_concept,  software_engineer_concept)
+```
 
 如果d1-d2<0，说明在语义空间中，software_engineer_concept更接近male_concept，更远离female_concept。
 
 换言之，在该语料中，人们对软件工程师这一类工作，对女性存在刻板印象(偏见)。
+
+
+
+**下载glove_w2v.6B.100d.txt**链接: https://pan.baidu.com/s/1MMfQ7M0YCzL9Klp4zrlHBw 提取码: 72l0 
 
 ```python
 import cntext as ct
