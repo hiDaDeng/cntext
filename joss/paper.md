@@ -59,9 +59,9 @@ As far as we know, cntext is the only Python package that provides **semantic pr
 
 
 
-# Features
+# Functional modules
 
-Functional modules include
+The functional modules of cntext include:
 
 **stats.py**
 
