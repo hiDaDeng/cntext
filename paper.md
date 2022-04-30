@@ -93,7 +93,7 @@ We list 12 pkl dictionary here, some of English dictionary listed below are orga
 
 | Built-in file                               | Dictionary                                                   | Lanuage         | 功能                                                         |
 | ------------------------------------------- | ------------------------------------------------------------ | --------------- | ------------------------------------------------------------ |
-| DUTIR.pkl                                   | DUTIR                                                        | Chinese         | Seven categories of emotions: 哀, 好, 惊, 惧, 乐, 怒, 恶     |
+| DUTIR.pkl                                   | DUTIR                                                        | Chinese         | Seven categories of emotions                                 |
 | HOWNET.pkl                                  | Hownet                                                       | Chinese         | Positive、Negative                                           |
 | sentiws.pkl                                 | SentimentWortschatz (SentiWS)                                | English         | Positive、Negative；<br>Valence                              |
 | ChineseFinancialFormalUnformalSentiment.pkl | Chinese finance dictionary, contains formal、unformal、positive、negative | Chinese         | formal-pos、<br>formal-neg；<br>unformal-pos、<br>unformal-neg |
