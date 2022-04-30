@@ -51,7 +51,7 @@ We can count the occurrences of a certain type of word in the text based on an c
 
 ## Word-embeddings-based method
 
-Compared with the dictionary-based method, word-embedding based method has more efficient word representation ability and retains rich semantic information.So the scope of research topics is more wider, including social prejudice (stereotype) [@garg2018word], cultural cognition [@kozlowski2019geometry, @kurdi2019relationship], semantic change[@hamilton2016diachronic, @rodman2020timely], individual judgment and decision-making psychology[@bhatia2019predicting] .  A large number of studies have been published in international journals, such as Nature, Science, PNAS, Academy Management Journal, American Sociological Review, Management Science, etc.
+Compared with the dictionary-based method, word-embedding based method has more efficient word representation ability and retains rich semantic information.So the scope of research topics is more wider, including social prejudice (stereotype) [@garg2018word], cultural cognition [@kozlowski2019geometry; @kurdi2019relationship], semantic change[@hamilton2016diachronic; @rodman2020timely], individual judgment and decision-making psychology[@bhatia2019predicting] .  A large number of studies have been published in international journals, such as Nature, Science, PNAS, Academy Management Journal, American Sociological Review, Management Science, etc.
 
 
 
