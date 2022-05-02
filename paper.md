@@ -1,5 +1,5 @@
 ---
-title: 'cntext: A Python tool for text mining'
+title: 'cntext: a Python tool for text mining'
 tags:
   - text mining
   - social science
