@@ -638,9 +638,15 @@ Calculate the projected length of each word vector in the concept vector.Note th
 
 
 
-Refer "Grand, G., Blank, I.A., Pereira, F. and Fedorenko, E., 2022. Semantic projection recovers rich human knowledge of multiple object features from word embeddings. _Nature Human Behaviour_, pp.1-13."
+The picture below comes from  "Grand, G., Blank, I.A., Pereira, F. and Fedorenko, E., 2022. Semantic projection recovers rich human knowledge of multiple object features from word embeddings. _Nature Human Behaviour_, pp.1-13."
 
 
+
+
+
+
+
+![](img/Nature_Semantic_projection_recovering_human_knowledge_of.png)
 
 For example, in the corpus,  perhaps show that our human beings have different size memory(perception) about animals.
 

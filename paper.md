@@ -1,5 +1,5 @@
 ---
-title: 'cntext: A simple Python tooks for text mining'
+title: 'cntext: A Python tool for text mining'
 tags:
   - text mining
   - social science
@@ -75,7 +75,7 @@ basic text information
 **dictionary.py**
 
  build and extend dictionary(vocabulary)
- 
+
   -  throught Sopmi(mutual information) algorithm
   -  expand dictionary throught Word2Vec algorithm
 

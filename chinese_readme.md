@@ -644,7 +644,9 @@ Run
 
 分值越大，word越位于c_words2一侧。
 
+下图是语义投影示例图，本文算法和图片均来自 "Grand, G., Blank, I.A., Pereira, F. and Fedorenko, E., 2022. Semantic projection recovers rich human knowledge of multiple object features from word embeddings. _Nature Human Behaviour_, pp.1-13."
 
+![](img/Nature_Semantic_projection_recovering_human_knowledge_of.png)
 
 例如，人类的语言中，存在尺寸、性别、年龄、政治、速度、财富等不同的概念。每个概念可以由两组反义词确定概念的向量方向。
 
