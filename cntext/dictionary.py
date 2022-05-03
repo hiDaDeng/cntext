@@ -9,6 +9,7 @@ from collections import defaultdict
 import numpy as np
 import pandas as pd
 from cntext.stats import load_pkl_dict
+from gensim.models.phrases import Phrases, ENGLISH_CONNECTOR_WORDS
 import re
 
 STOPWORDS_zh = load_pkl_dict(file='STOPWORDS.pkl')['STOPWORDS']['chinese']
@@ -260,18 +261,31 @@ class W2VModels(object):
 
 
 
-    def train(self, input_txt_file, min_count=50):
+    def train(self, input_txt_file, min_count=50, ngram=False):
         """
         train word2vec model for corpus
         :param input_txt_file:  corpus file path
         :param min_count: Set the word to appear at least min_count times in the model
+        :param ngram: whether to take the ngram case into account，default False
         :return:
         """
 
         documents = list(open(input_txt_file, encoding='utf-8').readlines())
         print('Step 1/4:...Preprocess   corpus ...')
-        sentences = self.__preproces(documents=documents)
+        sents = self.__preproces(documents=documents)
         duration = int(time.time()-self.start)
+        sentences = []
+        if self.lang=='english' and ngram==True:
+            phrase_model = Phrases(sents, min_count=10, threshold=1, connector_words=ENGLISH_CONNECTOR_WORDS)
+            for sent in sents:
+                sentence = phrase_model[sent]
+                sentences.append(sentence)
+        elif self.lang=='chinese' and ngram==True:
+            phrase_model = Phrases(sents, min_count=10, threshold=1)
+            for sent in sents:
+                sentence = phrase_model[sent]
+                sentences.append(sentence)
+
         print('Step 2/4:...Train  word2vec model\n            used   {} s'.format(duration))
         self.model = word2vec.Word2Vec(sentences, min_count=min_count, workers=multiprocessing.cpu_count())
         modeldir = Path(self.cwd).joinpath('output', 'w2v_candi_words')

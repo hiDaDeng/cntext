@@ -387,9 +387,8 @@ Finish! used 44.49 s
 import cntext as ct
 import os
 
-#init W2VModels
-model = ct.W2VModels(cwd=os.getcwd(), 
-                     lang='english')  #corpus data w2v_corpus.txt
+#init W2VModels, corpus data w2v_corpus.txt
+model = ct.W2VModels(cwd=os.getcwd(), lang='english')  
 model.train(input_txt_file='data/w2v_corpus.txt')
 
 
