@@ -1,5 +1,4 @@
 import jieba.posseg as pseg
-import jieba
 import math,time
 from gensim.models import word2vec
 from pathlib import Path
@@ -10,7 +9,12 @@ import numpy as np
 import pandas as pd
 from cntext.stats import load_pkl_dict
 from gensim.models.phrases import Phrases, ENGLISH_CONNECTOR_WORDS
-import re
+from collections import Counter
+from mittens import GloVe
+from sklearn.feature_extraction.text import CountVectorizer
+import jieba
+
+
 
 STOPWORDS_zh = load_pkl_dict(file='STOPWORDS.pkl')['STOPWORDS']['chinese']
 STOPWORDS_en = load_pkl_dict(file='STOPWORDS.pkl')['STOPWORDS']['english']
@@ -25,6 +29,7 @@ class SoPmi:
         :param cwd:  The current folder path of the code, just set cwd=os.getcwd() will be okay!
         :param input_txt_file:  The path of the corpus file
         :param seedword_txt_file:  the path of manually selected seed word file
+        :param lang:  set the language for SoPmi
         """
         self.cwd = cwd
         self.text_file = input_txt_file
@@ -227,9 +232,9 @@ class SoPmi:
 class W2VModels(object):
     def __init__(self, cwd, lang='chinese'):
         """
-        模型初始化设置
-        :param cwd:  当前工作路径
-        :param lang:  数据的语言
+        initialize the W2VModels
+        :param cwd:  current work directory
+        :param lang:  set the language for W2VModels
         """
         self.cwd = cwd
         self.lang = lang
@@ -261,10 +266,11 @@ class W2VModels(object):
 
 
 
-    def train(self, input_txt_file, min_count=50, ngram=False):
+    def train(self, input_txt_file, vector_size=100, min_count=50, ngram=False):
         """
         train word2vec model for corpus
         :param input_txt_file:  corpus file path
+        :param vector_size: dimensionality of the word vectors.
         :param min_count: Set the word to appear at least min_count times in the model
         :param ngram: whether to take the ngram case into account，default False
         :return:
@@ -287,7 +293,7 @@ class W2VModels(object):
                 sentences.append(sentence)
 
         print('Step 2/4:...Train  word2vec model\n            used   {} s'.format(duration))
-        self.model = word2vec.Word2Vec(sentences, min_count=min_count, workers=multiprocessing.cpu_count())
+        self.model = word2vec.Word2Vec(sentences, vector_size=vector_size, min_count=min_count, workers=multiprocessing.cpu_count())
         modeldir = Path(self.cwd).joinpath('output', 'w2v_candi_words')
         Path(self.cwd).joinpath('output').mkdir(exist_ok=True)
         Path(self.cwd).joinpath('output', 'w2v_candi_words').mkdir(exist_ok=True)
@@ -397,6 +403,118 @@ def co_occurrence_matrix(documents, window_size=2, lang='chinese'):
         df.at[key[0], key[1]] = value
         df.at[key[1], key[0]] = value
     return df
+
+
+
+
+
+
+
+
+class Glove(object):
+    def __init__(self, cwd, lang='chinese'):
+        """
+        initialize the Glove model
+
+        :param lang: set language for Glove model
+        :return:
+        """
+        self.lang=lang
+        self.cwd = cwd
+
+
+
+    def create_vocab(self, file, min_count=5):
+        """
+        create vocabulary
+
+        :param file:  corpus file path, only support .txt file now!
+        :params min_count: When building the vocabulary ignore terms that wordcount strictly higher than the given threshold
+        :return:
+        """
+        self.glove_output_name = file.split('/')[-1].replace('.txt', '')
+        print('Step 1/4: ...Create vocabulary for Glove.')
+        text = open(file, encoding='utf-8').read()
+        if self.lang=='chinese':
+            words = list(jieba.cut(text))
+            self.words = [w for w in words if w not in STOPWORDS_zh]
+        else:
+            words = text.split(' ')
+            self.words = [w.lower() for w in words if w not in STOPWORDS_en]
+        # 压缩vocab
+        self.vocab = [k for (k, v) in Counter(self.words).items() if v >= min_count]
+        return self.vocab
+
+
+    def cooccurrence_matrix(self):
+        """
+        Create cooccurrence matrix
+
+        :return:
+        """
+        print('Step 2/4: ...Create cooccurrence matrix.')
+        cv = CountVectorizer(ngram_range=(1, 1),
+                             vocabulary=self.vocab)
+
+        docs = [' '.join(self.words)]
+        X = cv.fit_transform(docs)
+        Xc = (X.T * X)
+        Xc.setdiag(0)
+        self.coo_matrix = Xc.toarray()
+        return self.coo_matrix
+
+
+    def train_embeddings(self, vector_size=50, max_iter=25):
+        """
+        Train glove embeddings
+
+        :params vector_size:  Dimensionality of the word vectors. Default: 50
+        :params max_iter: Number of training epochs. Default: 25
+        :return:
+        """
+        start = time.time()
+        print('Step 3/4: ...Train glove embeddings. \n             Note, this part takes a long time to run')
+        glove_model = GloVe(n=vector_size, max_iter=max_iter)
+        embeddings = glove_model.fit(self.coo_matrix)
+        self.glove_embeddings = np.column_stack((np.array(self.vocab), embeddings))
+
+        end = time.time()
+        duration = round(end-start, 2)
+        print('Step 3/4: ... Finish! Use {} s'.format(duration))
+        return self.glove_embeddings
+
+
+    def save(self):
+        """
+        Save glove embeddings as a txt file. Note we will use gensim to convert the glove embeddings in word2vec format
+        :return:
+        """
+
+        print('Step 4/4: ... Save the glove embeddings to a txt file')
+        from gensim.scripts.glove2word2vec import glove2word2vec
+        txtdir = Path(self.cwd).joinpath('output', 'Glove')
+        Path(self.cwd).joinpath('output', 'Glove').mkdir(exist_ok=True)
+        glove_file = Path(txtdir).joinpath('{}_glove.txt'.format(self.glove_output_name))
+        w2v_file = Path(txtdir).joinpath('{}_w2v.txt'.format(self.glove_output_name))
+        with open(glove_file, 'a+', encoding='utf-8') as f:
+            res_text = ''
+            for glove_embedding in self.glove_embeddings:
+                res_text += ' '.join(glove_embedding) + '\n'
+            f.write(res_text)
+        glove2word2vec(glove_file, w2v_file)
+
+        import os
+        os.remove(glove_file)
+
+
+
+
+
+
+
+
+
+
 
 
 

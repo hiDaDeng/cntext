@@ -22,6 +22,7 @@
 - [x] **dictionary** 构建词表(典)
   - [x] Sopmi 互信息扩充词典法
   - [x] W2Vmodels 词向量扩充词典法
+  - [x] Glove Glove词向量模型
 - [x] **similarity**   文本相似度
   - [x] cos相似度
   - [x] jaccard相似度
@@ -507,7 +508,7 @@ array([-0.45616838, -0.7799563 ,  0.56367606, -0.8570078 ,  0.600359  ,
 
 
 
-## 2.3 co_occurrence_matrix
+### 2.3 co_occurrence_matrix
 
 词共现矩阵
 
@@ -538,6 +539,37 @@ ct.co_occurrence_matrix(documents2,
 ![](img/co_occurrence2.png)
 
 <br><br>
+
+### 2.4  Glove
+
+构建Glove词嵌入模型，使用英文数据``data/brown_corpus.txt``
+
+```python
+import cntext as ct
+import os
+
+model = ct.Glove(cwd=os.getcwd(), lang='english')
+model.create_vocab(file='data/brown_corpus.txt', min_count=5)
+model.cooccurrence_matrix()
+model.train_embeddings(vector_size=50, max_iter=25)
+model.save()
+```
+
+Run
+
+```
+Step 1/4: ...Create vocabulary for Glove.
+Step 2/4: ...Create cooccurrence matrix.
+Step 3/4: ...Train glove embeddings. 
+             Note, this part takes a long time to run
+Step 3/4: ... Finish! Use 175.98 s
+```
+
+生成的Glove词嵌入文件位于 ``output/Glove`` 。
+
+<br>
+
+<br>
 
 
 
