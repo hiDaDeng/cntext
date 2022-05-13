@@ -706,7 +706,3 @@ In size conception, the result show that mouse is smallest, horse is biggest.
 <br><br>
 
 
-
-## Citation
-
-If cntext is used in your research, please use the following format for citations.

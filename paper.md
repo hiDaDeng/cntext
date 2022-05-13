@@ -19,7 +19,7 @@ affiliations:
  - name: Faculty of Western Languages and Literatures, Harbin Normal Uninversity, China
    index: 2
 
-date: 30 Aprill 2022
+date: 13 May 2022
 bibliography: paper.bib
 ---
 
@@ -89,7 +89,7 @@ document similarity
 
 **mind.py** 
 
-digest cognitive(attitude、bias etc.) information
+digest cognitive(attitude、bias etc) information from word embeddings
 
   -  tm.semantic_distance
   -  tm.semantic_projection
@@ -103,12 +103,12 @@ digest cognitive(attitude、bias etc.) information
 >>>import cntext as ct
 >>>#Note: this is a word2vec format model
 >>>tm = ct.Text2Mind(w2v_model_path='glove_w2v.6B.100d.txt')
->>>engineer = ['program', 'software', 'computer']
->>>mans =  ["man", "he", "him"]
->>>womans = ["woman", "she", "her"]
->>>tm.sematic_distance(words=animals, 
->>>                    c_words1=mans, 
->>>                    c_words2=womans)
+>>>engineer_words = ['program', 'software', 'computer']
+>>>man_words =  ["man", "he", "him"]
+>>>woman_words = ["woman", "she", "her"]
+>>>tm.sematic_distance(words=engineer_words, 
+>>>                    c_words1=man_words, 
+>>>                    c_words2=woman_words)
 -0.38
 ```
 
@@ -120,13 +120,13 @@ digest cognitive(attitude、bias etc.) information
 
 
 ```python
->>>animals = ['mouse', 'cat', 'horse',  'pig', 'whale']
->>>smalls = ["small", "little", "tiny"]
->>>bigs = ["large", "big", "huge"]
+>>>animal_words = ['mouse', 'cat', 'horse',  'pig', 'whale']
+>>>small_words = ["small", "little", "tiny"]
+>>>big_words = ["large", "big", "huge"]
 >>>
->>>tm.sematic_projection(words=animals, 
->>>                      c_words1=smalls, 
->>>                      c_words2=bigs)
+>>>tm.sematic_projection(words=animal_words, 
+>>>                      c_words1=small_words, 
+>>>                      c_words2=big_words)
 [('mouse', -1.68),
  ('cat', -0.92),
  ('pig', -0.46),
@@ -136,8 +136,6 @@ digest cognitive(attitude、bias etc.) information
 
 
 In size conception, mouse is smallest, horse is biggest.
-
-
 
 
 

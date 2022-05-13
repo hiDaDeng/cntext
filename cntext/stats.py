@@ -126,7 +126,6 @@ def readability(text, zh_adjconj=None, lang='chinese'):
 
 
 
-
 def sentiment(text, diction, lang='chinese'):
     """
     calculate the occurrences of each emotional category words in text;

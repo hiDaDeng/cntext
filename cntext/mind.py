@@ -16,12 +16,25 @@ class Text2Mind(object):
         """
         print('Loading the model of {}'.format(w2v_model_path))
         start = time()
+        
         self.model = KeyedVectors.load_word2vec_format(w2v_model_path,
                                                        binary=False,
                                                        unicode_errors='ignore')
         duration = round(time()-start, 2)
         print('Load successfully, used {} s'.format(duration))
 
+    def k2v_model(self, word):
+        """
+        return the KeyedVectors object.
+        """
+        return self.model
+
+
+    def get_vector(self, word):
+        """
+        get word vector
+        """
+        return self.model.get_vector(word)
 
 
     def __get_centroid(self, words):
