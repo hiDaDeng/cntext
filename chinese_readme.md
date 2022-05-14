@@ -658,14 +658,14 @@ import cntext as ct
 tm = ct.Text2Mind(w2v_model_path='glove_w2v.6B.100d.txt')
 
 engineer = ['program', 'software', 'computer']
-mans =  ["man", "he", "him"]
-womans = ["woman", "she", "her"]
+man_words =  ["man", "he", "him"]
+woman_words = ["woman", "she", "her"]
 
 #在语义空间中，工程师更接近于男人，而不是女人。
 #in semantic space, engineer is closer to man, other than woman.
-tm.sematic_distance(words=animals, 
-                    c_words1=mans, 
-                    c_words2=womans)
+tm.sematic_distance(words=engineer, 
+                    c_words1=man_words, 
+                    c_words2=woman_words)
 ```
 
 Run
@@ -678,11 +678,13 @@ Run
 
 ### 4.2 tm.sematic_projection(words, c_words1, c_words2) 
 
+为了解释词向量模型的语义投影，我使用了 2022 年 Nature 论文中的图片[@Grand2022SemanticPR]。 关于动物的名字，人类对动物大小的认知信息隐藏在语料库文本中。 通过将**LARGE WORDS** 和**SMALL WORDS**的含义用不同的**animals**的向量投影，动物在**size向量**上的投影（就像下图中的红线 ) 得到，因此可以通过计算比较动物的大小。
+
 根据两组反义词c_words1, c_words2构建一个概念(认知)向量, words中的每个词向量在概念向量中投影，即可得到认知信息。
 
 分值越大，word越位于c_words2一侧。
 
-下图是语义投影示例图，本文算法和图片均来自 "Grand, G., Blank, I.A., Pereira, F. and Fedorenko, E., 2022. Semantic projection recovers rich human knowledge of multiple object features from word embeddings. _Nature Human Behaviour_, pp.1-13."
+> Grand, G., Blank, I.A., Pereira, F. and Fedorenko, E., 2022. Semantic projection recovers rich human knowledge of multiple object features from word embeddings. _Nature Human Behaviour_, pp.1-13."
 
 ![](img/Nature_Semantic_projection_recovering_human_knowledge_of.png)
 
@@ -692,14 +694,14 @@ Run
 
 ```python
 animals = ['mouse', 'cat', 'horse',  'pig', 'whale']
-smalls = ["small", "little", "tiny"]
-bigs = ["large", "big", "huge"]
+small_words= ["small", "little", "tiny"]
+large_words = ["large", "big", "huge"]
 
 # In size conception, mouse is smallest, horse is biggest.
 # 在大小概念上，老鼠最小，马是最大的。
 tm.sematic_projection(words=animals, 
-                      c_words1=smalls, 
-                      c_words2=bigs)
+                      c_words1=small_words, 
+                      c_words2=large_words)
 ```
 
 Run
@@ -712,7 +714,7 @@ Run
  ('horse', 0.4)]
 ```
 
-
+关于尺寸的认知，人类在文本中隐含着老鼠较小，马较大。
 
 <br><br>
 

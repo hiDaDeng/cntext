@@ -665,11 +665,13 @@ Run
 
 ### 4.2 tm.sematic_projection(words, c_words1, c_words2) 
 
-Calculate the projected length of each word vector in the concept vector.Note that the calculation result reflects the direction of concept.Greater than 0 means semantically closer to c_words2.
+To explain the semantic projection of the word vector model, I use the picture from a Nature paper in 2022[@Grand2022SemanticPR]. Regarding the names of animals, human cognition information about animal size is hidden in the corpus text. By projecting the meaning of **LARGE WORDS** and **SMALL WORDS** with the vectors of different **animals**, the projection of the animal on the **size vector**(just like the red line in the bellow picture) is obtained, so the size of the animal can be compared by calculation.
+
+Calculate the projected length of each word vector in the concept vector.Note that the calculation result reflects the direction of concept.**Greater than 0 means semantically closer to c_words2**.
 
 
 
-The picture below comes from  "Grand, G., Blank, I.A., Pereira, F. and Fedorenko, E., 2022. Semantic projection recovers rich human knowledge of multiple object features from word embeddings. _Nature Human Behaviour_, pp.1-13."
+> Grand, G., Blank, I.A., Pereira, F. and Fedorenko, E., 2022. Semantic projection recovers rich human knowledge of multiple object features from word embeddings. _Nature Human Behaviour_, pp.1-13.
 
 
 
@@ -683,12 +685,12 @@ For example, in the corpus,  perhaps show that our human beings have different s
 
 ```python
 animals = ['mouse', 'cat', 'horse',  'pig', 'whale']
-smalls = ["small", "little", "tiny"]
-bigs = ["large", "big", "huge"]
+small_words = ["small", "little", "tiny"]
+large_words = ["large", "big", "huge"]
 
 tm.sematic_projection(words=animals, 
-                      c_words1=smalls, 
-                      c_words2=bigs)
+                      c_words1=small_words, 
+                      c_words2=large_words)
 ```
 
 Run
@@ -701,7 +703,7 @@ Run
  ('horse', 0.4)]
 ```
 
-In size conception, the result show that mouse is smallest, horse is biggest.
+Regarding the perception of size, humans have implied in the text that mice are smaller and horses are larger.
 
 <br><br>
 

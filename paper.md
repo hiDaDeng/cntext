@@ -122,17 +122,19 @@ digest cognitive(attitude、bias etc) information from word embeddings
 
 To explain the semantic projection of the word vector model, I use the picture from a Nature paper in 2022[@Grand2022SemanticPR]. Regarding the names of animals, human cognition information about animal size is hidden in the corpus text. By projecting the meaning of **LARGE** and **SMALL** with the vectors of different **animals**, the projection of the animal on the **size vector**(just like the red line in the bellow picture) is obtained, so the size of the animal can be compared by calculation.
 
+Calculate the projected length of each word vector in the concept vector.Note that the calculation result reflects the direction of concept.**Greater than 0 means semantically closer to c_words2**.
+
 ![](img/Nature_Semantic_projection_recovering_human_knowledge_of.png)
 
 
 ```python
 >>>animal_words = ['mouse', 'cat', 'horse',  'pig', 'whale']
 >>>small_words = ["small", "little", "tiny"]
->>>big_words = ["large", "big", "huge"]
+>>>large_words = ["large", "big", "huge"]
 >>>
 >>>tm.sematic_projection(words=animal_words, 
 >>>                      c_words1=small_words, 
->>>                      c_words2=big_words)
+>>>                      c_words2=large_words)
 [('mouse', -1.68),
  ('cat', -0.92),
  ('pig', -0.46),
