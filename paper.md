@@ -99,6 +99,10 @@ digest cognitive(attitude、bias etc) information from word embeddings
 # Exmaples
 ## semantic distance
 
+**sematic_distance = distance(man, engineer)-distance(woman, engineer)**
+
+
+
 ```python
 >>>import cntext as ct
 >>>#Note: this is a word2vec format model
@@ -112,11 +116,13 @@ digest cognitive(attitude、bias etc) information from word embeddings
 -0.38
 ```
 
-
-0.38 means that in semantic space, engineer is closer to man, other than woman.
-
+**sematic_distance<0**, that is, distance(man, engineer)<distance(woman, engineer). Semantically, **engineer** is closer to **woman** and farther away from **man**, so the corpus implies more discrimination against **woman** about engineer occupation. 
 
 ## semantic projection
+
+To explain the semantic projection of the word vector model, I use the picture from a Nature paper in 2022[@Grand2022SemanticPR]. Regarding the names of animals, human cognition information about animal size is hidden in the corpus text. By projecting the meaning of **LARGE** and **SMALL** with the vectors of different **animals**, the projection of the animal on the **size vector**(just like the red line in the bellow picture) is obtained, so the size of the animal can be compared by calculation.
+
+![](img/Nature_Semantic_projection_recovering_human_knowledge_of.png)
 
 
 ```python
@@ -135,7 +141,7 @@ digest cognitive(attitude、bias etc) information from word embeddings
 ```
 
 
-In size conception, mouse is smallest, horse is biggest.
+Regarding the perception of size, humans have implied in the text that mice are smaller and horses are larger.
 
 
 
