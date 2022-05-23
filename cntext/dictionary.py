@@ -256,7 +256,7 @@ class W2VModels(object):
             return docs
         elif self.lang=='chinese':
             for document in documents:
-                words = list(jieba.cut(document))
+                words = jieba.cut(document)
                 document = [w for w in words if w not in STOPWORDS_zh]
                 docs.append(document)
             return docs
@@ -266,7 +266,7 @@ class W2VModels(object):
 
 
 
-    def train(self, input_txt_file, vector_size=100, min_count=50, ngram=False):
+    def train(self, input_txt_file, vector_size=100, min_count=5, ngram=False):
         """
         train word2vec model for corpus
         :param input_txt_file:  corpus file path
@@ -280,6 +280,7 @@ class W2VModels(object):
         print('Step 1/4:...Preprocess   corpus ...')
         sents = self.__preproces(documents=documents)
         duration = int(time.time()-self.start)
+
         sentences = []
         if self.lang=='english' and ngram==True:
             phrase_model = Phrases(sents, min_count=10, threshold=1, connector_words=ENGLISH_CONNECTOR_WORDS)
@@ -291,6 +292,8 @@ class W2VModels(object):
             for sent in sents:
                 sentence = phrase_model[sent]
                 sentences.append(sentence)
+        else:
+            sentences = sents
 
         print('Step 2/4:...Train  word2vec model\n            used   {} s'.format(duration))
         self.model = word2vec.Word2Vec(sentences, vector_size=vector_size, min_count=min_count, workers=multiprocessing.cpu_count())
