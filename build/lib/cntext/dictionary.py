@@ -291,6 +291,7 @@ class W2VModels(object):
             phrase_model = Phrases(sents, min_count=10, threshold=1)
             for sent in sents:
                 sentence = phrase_model[sent]
+                sentence = [w.replace('_', '') for w in sentence]
                 sentences.append(sentence)
         else:
             sentences = sents
