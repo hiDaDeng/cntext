@@ -128,11 +128,11 @@ def readability(text, zh_adjconj=None, lang='chinese'):
 
 def sentiment(text, diction, lang='chinese'):
     """
-    calculate the occurrences of each emotional category words in text;
+    calculate the occurrences of each sentiment category words in text;
     the complex influence of intensity adverbs and negative words on emotion is not considered,
     :param text:  text sring
-    :param diction:  emotion dictionary；
-    :param language: "chinese" or "english"; default language="chinese"
+    :param diction:  sentiment dictionary；
+    :param lang: "chinese" or "english"; default lang="chinese"
 
     diction = {'category1':  'category1 emotion word list',
                'category2':  'category2 emotion word list',
@@ -179,6 +179,48 @@ def sentiment(text, diction, lang='chinese'):
     result_dict['sentence_num'] = sentence_num
     return result_dict
 
+
+
+def sentiment_by_valence(text, diction, lang='english'):
+    """
+    calculate the occurrences of each sentiment category words in text;
+    the complex influence of intensity adverbs and negative words on emotion is not considered.
+    :param text:  text sring
+    :param diction:  sentiment dictionary with valence.；
+    :param lang: "chinese" or "english"; default lang="english"
+
+    :return:
+    """
+    score = 0
+
+    def query_word(word, df):
+        """
+        query
+        """
+        try:
+            return df[df["word"] == word]['valence'].values[0]
+        except:
+            return 0
+
+    if lang == 'chinese':
+        words = list(jieba.cut(text))
+        for word in words:
+            try:
+                score += query_word(word=word, df=diction)
+            except:
+                score += 0
+
+    else:
+        rgx = re.compile("(?:(?:[^a-zA-Z]+')|(?:'[^a-zA-Z]+))|(?:[^a-zA-Z']+)")
+        words = re.split(rgx, text)
+        for word in words:
+            try:
+                score += query_word(word=word, df=diction)
+            except:
+                score += 0
+
+    res = round(score/len(words), 2)
+    return res
 
 
 

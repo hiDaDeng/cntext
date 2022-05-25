@@ -1,6 +1,8 @@
 [toc]
 
-# cntext
+![](img/logo.png)
+
+
 
 [中文文档](chinese_readme.md)
 
@@ -96,6 +98,7 @@ Currently, the built-in functions of stats.py are:
 - **dict_pkl_list()**  get the list of built-in dictionaries (pkl format) in cntext
 - **load_pkl_dict()**  load the pkl dictionary file
 - **sentiment()** sentiment analysis
+- **sentiment_by_valence()** valence sentiment analysis
 
 
 
@@ -235,6 +238,7 @@ We list 12 pkl dictionary here, some of English dictionary listed below are orga
 | LoughranMcDonald.pkl                        | Accounting Finance LM Dictionary                             | English         | Positive and Negative emotion words in the financial field   |
 | ADV_CONJ.pkl                                | adverbial & conjunction                                      | Chinese         |                                                              |
 | STOPWORDS.pkl                               |                                                              | English&Chinese | stopwordlist                                                 |
+| concreteness.pkl                            | Brysbaert, M., Warriner, A. B., & Kuperman, V. (2014). Concreteness ratings for 40 thousand generally known English word lemmas. Behavior Research Methods, 46, 904–911 | English         | word & concreateness score                                   |
 
 
 
@@ -337,7 +341,98 @@ Run
 
 <br>
 
+
+
+## 1.6 sentiment_by_valence()
+
+**sentiment_by_valence(text, diction, lang='english')**
+
+Calculate the occurrences of each sentiment category words in text;  The complex influence of intensity adverbs and negative words on emotion is not considered.
+
+- text:  text sring
+- diction:  sentiment dictionary with valence.；
+- lang: "chinese" or "english"; default language="english"
+
+
+
+Here we want to study the concreteness of text.  The **concreteness.pkl** that comes from Brysbaert2014. 
+
+>Brysbaert, M., Warriner, A. B., & Kuperman, V. (2014). Concreteness ratings for 40 thousand generally known English word lemmas. Behavior Research Methods, 46, 904–911
+
+```python
+import cntext as ct
+
+# load the concreteness.pkl dictionary file
+concreteness_df = ct.load_pkl_dict('concreteness.pkl')
+concreteness_df.head()
+```
+
+Run
+
+|| word | valence |
+| ---: | :-------------- | ----------: |
+|  0 | roadsweeper   |      4.85 |
+|  1 | traindriver   |      4.54 |
+|  2 | tush          |      4.45 |
+|  3 | hairdress     |      3.93 |
+|  4 | pharmaceutics |      3.77 |
+
 <br>
+
+```python
+reply = "I'll go look for that"
+
+score=ct.sentiment_by_valence(text=reply, 
+                              diction=concreteness_df, 
+                              lang='english')
+score
+```
+
+Run
+
+```
+1.85
+```
+
+
+
+<br>
+
+```python
+employee_replys = ["I'll go look for that",
+                   "I'll go search for that",
+                   "I'll go search for that top",
+                   "I'll go search for that t-shirt",
+                   "I'll go look for that t-shirt in grey",
+                   "I'll go search for that t-shirt in grey"]
+
+for idx, reply in enumerate(employee_replys):
+    score=ct.sentiment_by_valence(text=reply, 
+                                  diction=concreteness_df, 
+                                  lang='english')
+    
+    template = "Concreteness Score: {score:.2f} | Example-{idx}: {exmaple}"
+    print(template.format(score=score, 
+                          idx=idx, 
+                          exmaple=reply))
+    
+ct.sentiment_by_valence(text=text, diction=concreteness_df, lang='english')
+```
+
+Run
+
+```
+Concreteness Score: 1.55 | Example-0: I'll go look for that
+Concreteness Score: 1.55 | Example-1: I'll go search for that
+Concreteness Score: 1.89 | Example-2: I'll go search for that top
+Concreteness Score: 2.04 | Example-3: I'll go search for that t-shirt
+Concreteness Score: 2.37 | Example-4: I'll go look for that t-shirt in grey
+Concreteness Score: 2.37 | Example-5: I'll go search for that t-shirt in grey
+```
+
+
+
+<br><br>
 
 
 
@@ -706,5 +801,4 @@ Run
 Regarding the perception of size, humans have implied in the text that mice are smaller and horses are larger.
 
 <br><br>
-
 

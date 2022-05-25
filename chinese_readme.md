@@ -81,6 +81,7 @@ PACKAGE CONTENTS
 - **dict_pkl_list**  获取cntext内置词典列表(pkl格式)
 - **load_pkl_dict** 导入pkl词典文件
 - **sentiment** 情感分析
+- 
 
 
 
@@ -230,21 +231,22 @@ Run
 
 词典对应关系, 部分情感词典资料整理自 [quanteda.sentiment](https://github.com/quanteda/quanteda.sentiment)
 
-| pkl文件                                     | 词典                                                       | 语言   | 功能                                                         |
-| ------------------------------------------- | ---------------------------------------------------------- | ------ | ------------------------------------------------------------ |
-| DUTIR.pkl                                   | 大连理工大学情感本体库                                     | 中文   | 七大类情绪，``哀, 好, 惊, 惧, 乐, 怒, 恶``                   |
-| HOWNET.pkl                                  | 知网Hownet词典                                             | 中文   | 正面词、负面词                                               |
-| sentiws.pkl                                 | SentimentWortschatz (SentiWS)                              | 英文   | 正面词、负面词；<br>效价                                     |
-| ChineseFinancialFormalUnformalSentiment.pkl | 金融领域正式、非正式；积极消极                             | 中文   | formal-pos、<br>formal-neg；<br>unformal-pos、<br>unformal-neg |
-| ANEW.pkl                                    | 英语单词的情感规范Affective Norms for English Words (ANEW) | 英文   | 词语效价信息                                                 |
-| LSD2015.pkl                                 | Lexicoder Sentiment Dictionary (2015)                      | 英文   | 正面词、负面词                                               |
-| NRC.pkl                                     | NRC Word-Emotion Association Lexicon                       | 英文   | 细粒度情绪词；                                               |
-| geninqposneg.pkl                            |                                                            |        |                                                              |
-| HuLiu.pkl                                   | Hu&Liu (2004)正、负情感词典                                | 英文   | 正面词、负面词                                               |
-| AFINN.pkl                                   | 尼尔森 (2011) 的“新 ANEW”效价词表                          | 英文   | 情感效价信息valence                                          |
-| LoughranMcDonald.pkl                        | 会计金融LM词典                                             | 英文   | 金融领域正、负面情感词                                       |
-| ADV_CONJ.pkl                                | 副词连词                                                   | 中文   |                                                              |
-| STOPWORDS.pkl                               |                                                            | 中、英 | 停用词                                                       |
+| pkl文件                                     | 词典                                                         | 语言    | 功能                                                         |
+| ------------------------------------------- | ------------------------------------------------------------ | ------- | ------------------------------------------------------------ |
+| DUTIR.pkl                                   | 大连理工大学情感本体库                                       | 中文    | 七大类情绪，``哀, 好, 惊, 惧, 乐, 怒, 恶``                   |
+| HOWNET.pkl                                  | 知网Hownet词典                                               | 中文    | 正面词、负面词                                               |
+| sentiws.pkl                                 | SentimentWortschatz (SentiWS)                                | 英文    | 正面词、负面词；<br>效价                                     |
+| ChineseFinancialFormalUnformalSentiment.pkl | 金融领域正式、非正式；积极消极                               | 中文    | formal-pos、<br>formal-neg；<br>unformal-pos、<br>unformal-neg |
+| ANEW.pkl                                    | 英语单词的情感规范Affective Norms for English Words (ANEW)   | 英文    | 词语效价信息                                                 |
+| LSD2015.pkl                                 | Lexicoder Sentiment Dictionary (2015)                        | 英文    | 正面词、负面词                                               |
+| NRC.pkl                                     | NRC Word-Emotion Association Lexicon                         | 英文    | 细粒度情绪词；                                               |
+| geninqposneg.pkl                            |                                                              |         |                                                              |
+| HuLiu.pkl                                   | Hu&Liu (2004)正、负情感词典                                  | 英文    | 正面词、负面词                                               |
+| AFINN.pkl                                   | 尼尔森 (2011) 的“新 ANEW”效价词表                            | 英文    | 情感效价信息valence                                          |
+| LoughranMcDonald.pkl                        | 会计金融LM词典                                               | 英文    | 金融领域正、负面情感词                                       |
+| ADV_CONJ.pkl                                | 副词连词                                                     | 中文    |                                                              |
+| STOPWORDS.pkl                               |                                                              | 中、英  | 停用词                                                       |
+| concreteness.pkl                            | Brysbaert, M., Warriner, A. B., & Kuperman, V. (2014). Concreteness ratings for 40 thousand generally known English word lemmas. Behavior Research Methods, 46, 904–911 | English | word & concreateness score                                   |
 
 
 
@@ -344,7 +346,104 @@ Run
  'sentence_num': 1}
 ```
 
-<br><br>
+<br>
+
+### 1.6 sentiment_by_valence()
+sentiment函数默认所有情感词权重均为1，只需要统计文本中情感词的个数，即可得到文本情感得分。
+
+sentiment_by_valence(text, diction, lang='english')函数考虑了词语的效价(valence)
+
+- text 待输入文本
+- diction 带效价的词典，DataFrame格式。
+- lang 语言类型'chinese' 或 'english'，默认'english'
+
+这里我们以文本具体性度量为例， **concreteness.pkl** 整理自 Brysbaert2014的文章。
+
+>Brysbaert, M., Warriner, A. B., & Kuperman, V. (2014). Concreteness ratings for 40 thousand generally known English word lemmas. Behavior Research Methods, 46, 904–911
+
+```python
+import cntext as ct
+
+# load the concreteness.pkl dictionary file
+concreteness_df = ct.load_pkl_dict('concreteness.pkl')
+concreteness_df.head()
+```
+
+Run
+
+
+
+
+|      | word          | valence |
+| ---: | :------------ | ------: |
+|    0 | roadsweeper   |    4.85 |
+|    1 | traindriver   |    4.54 |
+|    2 | tush          |    4.45 |
+|    3 | hairdress     |    3.93 |
+|    4 | pharmaceutics |    3.77 |
+
+<br>
+
+先看一条文本的具体性度量
+
+```python
+reply = "I'll go look for that"
+
+score=ct.sentiment_by_valence(text=reply, 
+                              diction=concreteness_df, 
+                              lang='english')
+score
+```
+
+Run
+
+```
+1.85
+```
+
+
+
+<br>
+
+很多条文本的具体性度量
+
+```python
+employee_replys = ["I'll go look for that",
+                   "I'll go search for that",
+                   "I'll go search for that top",
+                   "I'll go search for that t-shirt",
+                   "I'll go look for that t-shirt in grey",
+                   "I'll go search for that t-shirt in grey"]
+
+for idx, reply in enumerate(employee_replys):
+    score=ct.sentiment_by_valence(text=reply, 
+                                  diction=concreteness_df, 
+                                  lang='english')
+    
+    template = "Concreteness Score: {score:.2f} | Example-{idx}: {exmaple}"
+    print(template.format(score=score, 
+                          idx=idx, 
+                          exmaple=reply))
+    
+ct.sentiment_by_valence(text=text, diction=concreteness_df, lang='english')
+```
+
+Run
+
+```
+Concreteness Score: 1.55 | Example-0: I'll go look for that
+Concreteness Score: 1.55 | Example-1: I'll go search for that
+Concreteness Score: 1.89 | Example-2: I'll go search for that top
+Concreteness Score: 2.04 | Example-3: I'll go search for that t-shirt
+Concreteness Score: 2.37 | Example-4: I'll go look for that t-shirt in grey
+Concreteness Score: 2.37 | Example-5: I'll go search for that t-shirt in grey
+```
+
+
+
+
+
+<br>
 
 
 
