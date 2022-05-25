@@ -1,6 +1,6 @@
 [toc]
 
-# cntext
+# ![](img/logo.png)
 
 [旧版cntext入口](version1.2.md)
 
