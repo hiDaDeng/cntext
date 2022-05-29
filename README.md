@@ -802,3 +802,18 @@ Regarding the perception of size, humans have implied in the text that mice are 
 
 <br><br>
 
+
+
+## Citation
+If you use **cntext** in your research or in your project, please cite:
+
+
+```
+@misc{dengcntext,
+  title={cntext},
+  author={Xudong Deng and Nan Peng},
+  howpublished={\url{https://github.com/hidadeng/cntext}},
+  year={2022}
+}
+```
+

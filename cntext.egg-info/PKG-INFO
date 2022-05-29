@@ -14,7 +14,9 @@ License-File: LICENSE
 
 [toc]
 
-# cntext
+![](img/logo.png)
+
+
 
 [中文文档](chinese_readme.md)
 
@@ -388,6 +390,25 @@ Run
 |  2 | tush          |      4.45 |
 |  3 | hairdress     |      3.93 |
 |  4 | pharmaceutics |      3.77 |
+
+<br>
+
+```python
+reply = "I'll go look for that"
+
+score=ct.sentiment_by_valence(text=reply, 
+                              diction=concreteness_df, 
+                              lang='english')
+score
+```
+
+Run
+
+```
+1.85
+```
+
+
 
 <br>
 

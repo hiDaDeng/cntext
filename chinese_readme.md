@@ -819,6 +819,22 @@ Run
 
 
 
+## 引用声明
+
+如果再研究或项目中使用到**cntext** ，请声明出处。
+
+
+```
+@misc{dengcntext,
+  title={cntext},
+  author={Xudong Deng and Nan Peng},
+  howpublished={\url{https://github.com/hidadeng/cntext}},
+  year={2022}
+}
+```
+
+
+
 ## 如果
 
 如果您是经管人文社科专业背景，编程小白，面临海量文本数据采集和处理分析艰巨任务，可以参看[《python网络爬虫与文本数据分析》](https://ke.qq.com/course/482241?tuin=163164df)视频课。作为文科生，一样也是从两眼一抹黑开始，这门课程是用五年时间凝缩出来的。自认为讲的很通俗易懂o(*￣︶￣*)o，
