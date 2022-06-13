@@ -19,9 +19,7 @@ cntext/files/DUTIR.pkl
 cntext/files/HOWNET.pkl
 cntext/files/HuLiu.pkl
 cntext/files/LSD2015.pkl
-cntext/files/LoughranMcDonald.pkl
 cntext/files/NRC.pkl
 cntext/files/STOPWORDS.pkl
-cntext/files/concreteness.pkl
 cntext/files/geninqposneg.pkl
 cntext/files/sentiws.pkl

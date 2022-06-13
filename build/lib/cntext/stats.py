@@ -152,6 +152,12 @@ def sentiment(text, diction, lang='chinese'):
 
     
     if lang=='chinese':
+        # using add_word to add chinese word in jieba
+        for senti_category in senti_categorys:
+            senti_category_words = diction[senti_category]
+            for w in senti_category_words:
+                jieba.add_word(w)
+
         sentence_num = len(cn_seg_sent(text))
         words = list(jieba.cut(text))
         word_num = len(words)

@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: cntext
-Version: 1.7.0
+Version: 1.7.1
 Summary: Chinese text analysis library, which can perform word frequency statistics, dictionary expansion, sentiment analysis, similarity, readability, co-occurrence analysis, social calculation (attitude, prejudice, culture) on texts
 Home-page: https://github.com/hidadeng/cntext
 Author: 大邓
@@ -815,6 +815,21 @@ Run
 Regarding the perception of size, humans have implied in the text that mice are smaller and horses are larger.
 
 <br><br>
+
+
+
+## Citation
+If you use **cntext** in your research or in your project, please cite:
+
+
+```
+@misc{dengcntext,
+  title={cntext},
+  author={Xudong Deng and Nan Peng},
+  howpublished={\url{https://github.com/hidadeng/cntext}},
+  year={2022}
+}
+```
 
 
 
