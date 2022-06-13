@@ -251,6 +251,7 @@ load the pkl dictionary file and return dict type data.
 ```python
 import cntext as ct
 
+print(ct.__version__)
 # load the pkl dictionary file
 print(ct.load_pkl_dict('NRC.pkl'))
 ```
@@ -258,11 +259,16 @@ print(ct.load_pkl_dict('NRC.pkl'))
 Run
 
 ```
+1.7.1 
+
 {'NRC': {'anger': ['abandoned', 'abandonment', 'abhor', 'abhorrent', ...],
          'anticipation': ['accompaniment','achievement','acquiring', ...],
          'disgust': ['abject', 'abortion', 'abundance', 'abuse', ...],
          'fear': ['anxiety', 'anxious', 'apache', 'appalling', ...],
          ......
+ 
+ 'Desc': 'NRC Word-Emotion Association Lexicon', 
+ 'Referer': 'Mohammad, Saif M., and Peter D. Turney. "Nrc emotion lexicon." National Research Council, Canada 2 (2013).'
          }
 ```
 
@@ -362,8 +368,8 @@ Here we want to study the concreteness of text.  The **concreteness.pkl** that c
 ```python
 import cntext as ct
 
-# load the concreteness.pkl dictionary file
-concreteness_df = ct.load_pkl_dict('concreteness.pkl')
+# load the concreteness.pkl dictionary file;  cntext version >=1.7.1
+concreteness_df = ct.load_pkl_dict('concreteness.pkl')['concreteness']
 concreteness_df.head()
 ```
 
