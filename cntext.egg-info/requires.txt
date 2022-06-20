@@ -1,0 +1,9 @@
+jieba
+numpy
+mittens
+scikit-learn==1.0
+numpy==1.20.0
+matplotlib
+pyecharts
+gensim==4.0.0
+nltk
