@@ -225,28 +225,32 @@ Run
  'HuLiu.pkl',
  'AFINN.pkl',
  'ADV_CONJ.pkl',
- 'LoughranMcDonald.pkl',
+ 'Loughran_McDonald_Financial_Sentiment.pkl',
+ 'Chinese_Loughran_McDonald_Financial_Sentiment.pkl',
  'STOPWORDS.pkl']
 ```
 
 词典对应关系, 部分情感词典资料整理自 [quanteda.sentiment](https://github.com/quanteda/quanteda.sentiment)
 
-| pkl文件                                     | 词典                                                         | 语言    | 功能                                                         |
-| ------------------------------------------- | ------------------------------------------------------------ | ------- | ------------------------------------------------------------ |
-| DUTIR.pkl                                   | 大连理工大学情感本体库                                       | 中文    | 七大类情绪，``哀, 好, 惊, 惧, 乐, 怒, 恶``                   |
-| HOWNET.pkl                                  | 知网Hownet词典                                               | 中文    | 正面词、负面词                                               |
-| sentiws.pkl                                 | SentimentWortschatz (SentiWS)                                | 英文    | 正面词、负面词；<br>效价                                     |
-| ChineseFinancialFormalUnformalSentiment.pkl | 金融领域正式、非正式；积极消极                               | 中文    | formal-pos、<br>formal-neg；<br>unformal-pos、<br>unformal-neg |
-| ANEW.pkl                                    | 英语单词的情感规范Affective Norms for English Words (ANEW)   | 英文    | 词语效价信息                                                 |
-| LSD2015.pkl                                 | Lexicoder Sentiment Dictionary (2015)                        | 英文    | 正面词、负面词                                               |
-| NRC.pkl                                     | NRC Word-Emotion Association Lexicon                         | 英文    | 细粒度情绪词；                                               |
-| geninqposneg.pkl                            |                                                              |         |                                                              |
-| HuLiu.pkl                                   | Hu&Liu (2004)正、负情感词典                                  | 英文    | 正面词、负面词                                               |
-| AFINN.pkl                                   | 尼尔森 (2011) 的“新 ANEW”效价词表                            | 英文    | 情感效价信息valence                                          |
-| LoughranMcDonald.pkl                        | 会计金融LM词典                                               | 英文    | 金融领域正、负面情感词                                       |
-| ADV_CONJ.pkl                                | 副词连词                                                     | 中文    |                                                              |
-| STOPWORDS.pkl                               |                                                              | 中、英  | 停用词                                                       |
-| concreteness.pkl                            | Brysbaert, M., Warriner, A. B., & Kuperman, V. (2014). Concreteness ratings for 40 thousand generally known English word lemmas. Behavior Research Methods, 46, 904–911 | English | word & concreateness score                                   |
+| pkl文件                                           | 词典                                                         | 语言    | 功能                                                         |
+| ------------------------------------------------- | ------------------------------------------------------------ | ------- | ------------------------------------------------------------ |
+| DUTIR.pkl                                         | 大连理工大学情感本体库                                       | 中文    | 七大类情绪，``哀, 好, 惊, 惧, 乐, 怒, 恶``                   |
+| HOWNET.pkl                                        | 知网Hownet词典                                               | 中文    | 正面词、负面词                                               |
+| sentiws.pkl                                       | SentimentWortschatz (SentiWS)                                | 英文    | 正面词、负面词；<br>效价                                     |
+| ChineseFinancialFormalUnformalSentiment.pkl       | 金融领域正式、非正式；积极消极                               | 中文    | formal-pos、<br>formal-neg；<br>unformal-pos、<br>unformal-neg |
+| ANEW.pkl                                          | 英语单词的情感规范Affective Norms for English Words (ANEW)   | 英文    | 词语效价信息                                                 |
+| LSD2015.pkl                                       | Lexicoder Sentiment Dictionary (2015)                        | 英文    | 正面词、负面词                                               |
+| NRC.pkl                                           | NRC Word-Emotion Association Lexicon                         | 英文    | 细粒度情绪词；                                               |
+| geninqposneg.pkl                                  |                                                              |         |                                                              |
+| HuLiu.pkl                                         | Hu&Liu (2004)正、负情感词典                                  | 英文    | 正面词、负面词                                               |
+| AFINN.pkl                                         | 尼尔森 (2011) 的“新 ANEW”效价词表                            | 英文    | 情感效价信息valence                                          |
+| ADV_CONJ.pkl                                      | 副词连词                                                     | 中文    |                                                              |
+| STOPWORDS.pkl                                     |                                                              | 中、英  | 停用词                                                       |
+| concreteness.pkl                                  | Brysbaert, M., Warriner, A. B., & Kuperman, V. (2014). Concreteness ratings for 40 thousand generally known English word lemmas. Behavior Research Methods, 46, 904–911 | English | word & concreateness score                                   |
+| Chinese_Loughran_McDonald_Financial_Sentiment.pkl | 曾庆生, 周波, 张程, and 陈信元. "年报语调与内部人交易: 表里如一还是口是心非?." 管理世界 34, no. 09 (2018): 143-160. | 中文    | 正面、负面词                                                 |
+| Loughran_McDonald_Financial_Sentiment.pkl         | Loughran, Tim, and Bill McDonald. "When is a liability not a liability? Textual analysis, dictionaries, and 10‐Ks." The Journal of finance 66, no. 1 (2011): 35-65. | 英文    | 金融LM情绪词典2018年版本，含七个词表，分别是Negative, Positive, Uncertainty, Litigious, StrongModal, WeakModal, Constraining |
+
+
 
 
 
@@ -275,7 +279,7 @@ print(ct.load_pkl_dict('DUTIR.pkl'))
 Run
 
 ```
-1.7.1 
+1.7.4
 
 {'DUTIR': {'哀': ['怀想', '治丝而棼', '伤害',...],
            '好': ['进贤黜奸', '清醇', '放达', ...],
@@ -283,7 +287,7 @@ Run
            '惧': ['忸忸怩怩', '谈虎色变', '手忙脚乱',...],
            '乐': ['百龄眉寿', '娱心', '如意',...],
            '怒': ['饮恨吞声', '扬眉瞬目',...],
-           '恶': [出逃', '鱼肉百姓', '移天易日',...]},
+           '恶': ['出逃', '鱼肉百姓', '移天易日',...]},
  
  'Desc': '大连理工大学情感本体库，细粒度情感词典。含七大类情绪，依次是哀, 好, 惊, 惧, 乐, 怒, 恶',
  
