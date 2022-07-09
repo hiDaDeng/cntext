@@ -211,6 +211,7 @@ Run
  'HOWNET.pkl',
  'sentiws.pkl',
  'ChineseFinancialFormalUnformalSentiment.pkl',
+ 'Concreteness.pkl',
  'ANEW.pkl',
  'LSD2015.pkl',
  'NRC.pkl',
@@ -238,7 +239,7 @@ We list 12 pkl dictionary here, some of English dictionary listed below are orga
 | AFINN.pkl                                   | ANEW                                                         | English         | valence                                                      |
 | ADV_CONJ.pkl                                | adverbial & conjunction                                      | Chinese         |                                                              |
 | STOPWORDS.pkl                               |                                                              | English&Chinese | stopwordlist                                                 |
-| concreteness.pkl                            | Brysbaert, M., Warriner, A. B., & Kuperman, V. (2014). Concreteness ratings for 40 thousand generally known English word lemmas. Behavior Research Methods, 46, 904–911 | English         | word & concreateness score                                   |
+| Concreteness.pkl                            | Brysbaert, M., Warriner, A. B., & Kuperman, V. (2014). Concreteness ratings for 40 thousand generally known English word lemmas. Behavior Research Methods, 46, 904–911 | English         | word & concreateness score                                   |
 | Chinese_Loughran_McDonald_Financial_Sentiment.pkl | 曾庆生, 周波, 张程, and 陈信元. "年报语调与内部人交易: 表里如一还是口是心非?." 管理世界 34, no. 09 (2018): 143-160. | Chinese | 正面、负面词                                                 |
 | Loughran_McDonald_Financial_Sentiment.pkl         | Loughran, Tim, and Bill McDonald. "When is a liability not a liability? Textual analysis, dictionaries, and 10‐Ks." The Journal of finance 66, no. 1 (2011): 35-65. | English | Positive and Negative emotion words in the financial field。 Besides, in version of 2018, author add ``Uncertainty, Litigious, StrongModal, WeakModal, Constraining`` |
 
@@ -264,7 +265,7 @@ print(ct.load_pkl_dict('NRC.pkl'))
 Run
 
 ```
-1.7.4
+1.7.7
 
 {'NRC': {'anger': ['abandoned', 'abandonment', 'abhor', 'abhorrent', ...],
          'anticipation': ['accompaniment','achievement','acquiring', ...],

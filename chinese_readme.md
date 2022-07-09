@@ -218,6 +218,7 @@ Run
  'HOWNET.pkl',
  'sentiws.pkl',
  'ChineseFinancialFormalUnformalSentiment.pkl',
+ 'Concreteness.pkl',
  'ANEW.pkl',
  'LSD2015.pkl',
  'NRC.pkl',
@@ -246,7 +247,7 @@ Run
 | AFINN.pkl                                         | 尼尔森 (2011) 的“新 ANEW”效价词表                            | 英文    | 情感效价信息valence                                          |
 | ADV_CONJ.pkl                                      | 副词连词                                                     | 中文    |                                                              |
 | STOPWORDS.pkl                                     |                                                              | 中、英  | 停用词                                                       |
-| concreteness.pkl                                  | Brysbaert, M., Warriner, A. B., & Kuperman, V. (2014). Concreteness ratings for 40 thousand generally known English word lemmas. Behavior Research Methods, 46, 904–911 | English | word & concreateness score                                   |
+| Concreteness.pkl                                  | Brysbaert, M., Warriner, A. B., & Kuperman, V. (2014). Concreteness ratings for 40 thousand generally known English word lemmas. Behavior Research Methods, 46, 904–911 | English | word & concreateness score                                   |
 | Chinese_Loughran_McDonald_Financial_Sentiment.pkl | 曾庆生, 周波, 张程, and 陈信元. "年报语调与内部人交易: 表里如一还是口是心非?." 管理世界 34, no. 09 (2018): 143-160. | 中文    | 正面、负面词                                                 |
 | Loughran_McDonald_Financial_Sentiment.pkl         | Loughran, Tim, and Bill McDonald. "When is a liability not a liability? Textual analysis, dictionaries, and 10‐Ks." The Journal of finance 66, no. 1 (2011): 35-65. | 英文    | 金融LM情绪词典2018年版本，含七个词表，分别是Negative, Positive, Uncertainty, Litigious, StrongModal, WeakModal, Constraining |
 
@@ -279,13 +280,13 @@ print(ct.load_pkl_dict('DUTIR.pkl'))
 Run
 
 ```
-1.7.4
+1.7.7
 
 {'DUTIR': {'哀': ['怀想', '治丝而棼', '伤害',...],
            '好': ['进贤黜奸', '清醇', '放达', ...],
            '惊': ['惊奇不已', '魂惊魄惕', '海外奇谈',...],
            '惧': ['忸忸怩怩', '谈虎色变', '手忙脚乱',...],
-           '乐': ['百龄眉寿', '娱心', '如意',...],
+           '乐': ['神采', '喜人', '如意',...],
            '怒': ['饮恨吞声', '扬眉瞬目',...],
            '恶': ['出逃', '鱼肉百姓', '移天易日',...]},
  

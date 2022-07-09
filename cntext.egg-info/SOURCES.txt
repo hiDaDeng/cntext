@@ -16,6 +16,7 @@ cntext/files/AFINN.pkl
 cntext/files/ANEW.pkl
 cntext/files/ChineseFinancialFormalUnformalSentiment.pkl
 cntext/files/Chinese_Loughran_McDonald_Financial_Sentiment.pkl
+cntext/files/Concreteness.pkl
 cntext/files/DUTIR.pkl
 cntext/files/HOWNET.pkl
 cntext/files/HuLiu.pkl

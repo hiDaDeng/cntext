@@ -68,11 +68,11 @@ def term_freq(text, lang='chinese'):
 
 
 
-def readability(text, zh_adjconj=None, lang='chinese'):
+def readability(text, zh_advconj=None, lang='chinese'):
     """
     text readability, the larger the indicator, the higher the complexity of the article and the worse the readability.
     :param text: text string
-    :param zh_adjconj Chinese conjunctions and adverbs, receive list data type. By default, the built-in dictionary of cntext is used
+    :param zh_advconj Chinese conjunctions and adverbs, receive list data type. By default, the built-in dictionary of cntext is used
     :param language: "chinese" or "english"; default is "chinese"
     ------------
     【English readability】english_readability = 4.71 x (characters/words) + 0.5 x (words/sentences) - 21.43；
@@ -100,8 +100,8 @@ def readability(text, zh_adjconj=None, lang='chinese'):
         )
         return {"readability": ari}
     if lang=='chinese':
-        if zh_adjconj:
-            adv_conj_words = zh_adjconj
+        if zh_advconj:
+            adv_conj_words = zh_advconj
         else:
             adv_conj_words = set(ADV_words + CONJ_words)
         zi_num_per_sent = []
@@ -156,7 +156,11 @@ def sentiment(text, diction, lang='chinese'):
         for senti_category in senti_categorys:
             senti_category_words = diction[senti_category]
             for w in senti_category_words:
-                jieba.add_word(w)
+                try:
+                    jieba.add_word(w)
+                except:
+                    pass
+
 
         sentence_num = len(cn_seg_sent(text))
         words = list(jieba.cut(text))

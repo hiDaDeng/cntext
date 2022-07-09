@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: cntext
-Version: 1.7.4
+Version: 1.7.7
 Summary: Chinese text analysis library, which can perform word frequency statistics, dictionary expansion, sentiment analysis, similarity, readability, co-occurrence analysis, social calculation (attitude, prejudice, culture) on texts
 Home-page: https://github.com/hidadeng/cntext
 Author: 大邓
@@ -278,7 +278,7 @@ print(ct.load_pkl_dict('NRC.pkl'))
 Run
 
 ```
-1.7.3
+1.7.7
 
 {'NRC': {'anger': ['abandoned', 'abandonment', 'abhor', 'abhorrent', ...],
          'anticipation': ['accompaniment','achievement','acquiring', ...],
