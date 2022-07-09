@@ -230,9 +230,9 @@ We list 12 pkl dictionary here, some of English dictionary listed below are orga
 | ------------------------------------------- | ------------------------------------------------------------ | --------------- | ------------------------------------------------------------ |
 | DUTIR.pkl                                   | DUTIR                                                        | Chinese         | Seven categories of emotions: 哀, 好, 惊, 惧, 乐, 怒, 恶     |
 | HOWNET.pkl                                  | Hownet                                                       | Chinese         | Positive、Negative                                           |
-| sentiws.pkl                                 | SentimentWortschatz (SentiWS)                                | English         | Positive、Negative；<br>Valence                              |
+| sentiws.pkl                                 | SentimentWortschatz (SentiWS)                                | English         | Positive、Negative；<br>                              |
 | ChineseFinancialFormalUnformalSentiment.pkl | Chinese finance dictionary, contains formal、unformal、positive、negative | Chinese         | formal-pos、<br>formal-neg；<br>unformal-pos、<br>unformal-neg |
-| ANEW.pkl                                    | Affective Norms for English Words (ANEW)                     | English         | Valence                                                      |
+| ANEW.pkl                                    | Affective Norms for English Words (ANEW)                     | English         |                                                       |
 | LSD2015.pkl                                 | Lexicoder Sentiment Dictionary (2015)                        | English         | Positive、Negative                                           |
 | NRC.pkl                                     | NRC Word-Emotion Association Lexicon                         | English         | fine-grained sentiment words;                                |
 | HuLiu.pkl                                   | Hu&Liu (2004)                                                | English         | Positive、Negative                                           |

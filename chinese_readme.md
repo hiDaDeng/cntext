@@ -237,9 +237,9 @@ Run
 | ------------------------------------------------- | ------------------------------------------------------------ | ------- | ------------------------------------------------------------ |
 | DUTIR.pkl                                         | 大连理工大学情感本体库                                       | 中文    | 七大类情绪，``哀, 好, 惊, 惧, 乐, 怒, 恶``                   |
 | HOWNET.pkl                                        | 知网Hownet词典                                               | 中文    | 正面词、负面词                                               |
-| sentiws.pkl                                       | SentimentWortschatz (SentiWS)                                | 英文    | 正面词、负面词；<br>效价                                     |
+| sentiws.pkl                                       | SentimentWortschatz (SentiWS)                                | 英文    | 正面词、负面词；<br>                                         |
 | ChineseFinancialFormalUnformalSentiment.pkl       | 金融领域正式、非正式；积极消极                               | 中文    | formal-pos、<br>formal-neg；<br>unformal-pos、<br>unformal-neg |
-| ANEW.pkl                                          | 英语单词的情感规范Affective Norms for English Words (ANEW)   | 英文    | 词语效价信息                                                 |
+| ANEW.pkl                                          | 英语单词的情感规范Affective Norms for English Words (ANEW)   | 英文    |                                                              |
 | LSD2015.pkl                                       | Lexicoder Sentiment Dictionary (2015)                        | 英文    | 正面词、负面词                                               |
 | NRC.pkl                                           | NRC Word-Emotion Association Lexicon                         | 英文    | 细粒度情绪词；                                               |
 | geninqposneg.pkl                                  |                                                              |         |                                                              |
