@@ -236,7 +236,7 @@ Run
 
 | pkl文件                                           | 词典                                                         | 语言    | 功能                                                         |
 | ------------------------------------------------- | ------------------------------------------------------------ | ------- | ------------------------------------------------------------ |
-| ChineseEmoBank.pkl                                   | 中文情感词典，含``效价valence``和``唤醒度arousal``。在cntext中，我们没有将原作者中的词组纳入词典 | Chinese         | ``效价valence``和``唤醒度arousal`` |
+| ChineseEmoBank.pkl                                   | 中文情感词典，含``效价valence``和``唤醒度arousal``。在cntext中，我们只使用了CVAW词表(单词)，其他词典如CVAP, CVAS, CVAT没有纳入到ChineseEmoBank.pkl. | Chinese         | ``效价valence``和``唤醒度arousal`` |
 | DUTIR.pkl                                         | 大连理工大学情感本体库                                       | 中文    | 七大类情绪，``哀, 好, 惊, 惧, 乐, 怒, 恶``                   |
 | HOWNET.pkl                                        | 知网Hownet词典                                               | 中文    | 正面词、负面词                                               |
 | SentiWS.pkl                                       | SentimentWortschatz (SentiWS)                                | 德文    | 正面词、负面词；<br>                                         |

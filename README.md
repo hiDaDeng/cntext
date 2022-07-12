@@ -229,7 +229,7 @@ We list 12 pkl dictionary here, some of English dictionary listed below are orga
 
 | pkl文件                                     | 词典                                                         | 语言            | 功能                                                         |
 | ------------------------------------------- | ------------------------------------------------------------ | --------------- | ------------------------------------------------------------ |
-| ChineseEmoBank.pkl                                   | Chinese Sentiment Dictionary, includes 「valence」「arousal」. In cntext, we only take single word into account, ignore phrase.                                                        | Chinese         | valence, arousal|
+| ChineseEmoBank.pkl                                   | Chinese Sentiment Dictionary, includes 「valence」「arousal」. In cntext, we only take Chinese valence-arousal words (CVAW, single word) into account, ignore CVAP, CVAS, CVAT. | Chinese         | valence, arousal|
 | DUTIR.pkl                                   | DUTIR                                                        | Chinese         | Seven categories of emotions: 哀, 好, 惊, 惧, 乐, 怒, 恶     |
 | HOWNET.pkl                                  | Hownet                                                       | Chinese         | Positive、Negative                                           |
 | SentiWS.pkl                      | SentimentWortschatz (SentiWS)                                | German         | Positive、Negative；<br>                              |
