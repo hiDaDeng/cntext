@@ -218,6 +218,7 @@ Run
  'geninqposneg.pkl',
  'HuLiu.pkl',
  'AFINN.pkl',
+ 'ChineseEmoBank.pkl',
  'ADV_CONJ.pkl',
  'Loughran_McDonald_Financial_Sentiment.pkl',
  'Chinese_Loughran_McDonald_Financial_Sentiment.pkl',
@@ -228,15 +229,16 @@ We list 12 pkl dictionary here, some of English dictionary listed below are orga
 
 | pkl文件                                     | 词典                                                         | 语言            | 功能                                                         |
 | ------------------------------------------- | ------------------------------------------------------------ | --------------- | ------------------------------------------------------------ |
+| ChineseEmoBank.pkl                                   | Chinese Sentiment Dictionary, includes 「valence」「arousal」. In cntext, we only take single word into account, ignore phrase.                                                        | Chinese         | valence, arousal|
 | DUTIR.pkl                                   | DUTIR                                                        | Chinese         | Seven categories of emotions: 哀, 好, 惊, 惧, 乐, 怒, 恶     |
 | HOWNET.pkl                                  | Hownet                                                       | Chinese         | Positive、Negative                                           |
-| sentiws.pkl                                 | SentimentWortschatz (SentiWS)                                | English         | Positive、Negative；<br>                              |
+| SentiWS.pkl                      | SentimentWortschatz (SentiWS)                                | German         | Positive、Negative；<br>                              |
 | ChineseFinancialFormalUnformalSentiment.pkl | Chinese finance dictionary, contains formal、unformal、positive、negative | Chinese         | formal-pos、<br>formal-neg；<br>unformal-pos、<br>unformal-neg |
 | ANEW.pkl                                    | Affective Norms for English Words (ANEW)                     | English         |                                                       |
 | LSD2015.pkl                                 | Lexicoder Sentiment Dictionary (2015)                        | English         | Positive、Negative                                           |
 | NRC.pkl                                     | NRC Word-Emotion Association Lexicon                         | English         | fine-grained sentiment words;                                |
 | HuLiu.pkl                                   | Hu&Liu (2004)                                                | English         | Positive、Negative                                           |
-| AFINN.pkl                                   | ANEW                                                         | English         | valence                                                      |
+| AFINN.pkl                                   | Affective Norms for English Words                        | English         |                       |
 | ADV_CONJ.pkl                                | adverbial & conjunction                                      | Chinese         |                                                              |
 | STOPWORDS.pkl                               |                                                              | English&Chinese | stopwordlist                                                 |
 | Concreteness.pkl                            | Brysbaert, M., Warriner, A. B., & Kuperman, V. (2014). Concreteness ratings for 40 thousand generally known English word lemmas. Behavior Research Methods, 46, 904–911 | English         | word & concreateness score                                   |
@@ -265,7 +267,7 @@ print(ct.load_pkl_dict('NRC.pkl'))
 Run
 
 ```
-1.7.7
+1.7.8
 
 {'NRC': {'anger': ['abandoned', 'abandonment', 'abhor', 'abhorrent', ...],
          'anticipation': ['accompaniment','achievement','acquiring', ...],

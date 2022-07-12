@@ -222,6 +222,7 @@ Run
  'ANEW.pkl',
  'LSD2015.pkl',
  'NRC.pkl',
+ 'ChineseEmoBank.pkl',
  'geninqposneg.pkl',
  'HuLiu.pkl',
  'AFINN.pkl',
@@ -235,11 +236,12 @@ Run
 
 | pkl文件                                           | 词典                                                         | 语言    | 功能                                                         |
 | ------------------------------------------------- | ------------------------------------------------------------ | ------- | ------------------------------------------------------------ |
+| ChineseEmoBank.pkl                                   | 中文情感词典，含``效价valence``和``唤醒度arousal``。在cntext中，我们没有将原作者中的词组纳入词典 | Chinese         | ``效价valence``和``唤醒度arousal`` |
 | DUTIR.pkl                                         | 大连理工大学情感本体库                                       | 中文    | 七大类情绪，``哀, 好, 惊, 惧, 乐, 怒, 恶``                   |
 | HOWNET.pkl                                        | 知网Hownet词典                                               | 中文    | 正面词、负面词                                               |
-| sentiws.pkl                                       | SentimentWortschatz (SentiWS)                                | 英文    | 正面词、负面词；<br>                                         |
+| SentiWS.pkl                                       | SentimentWortschatz (SentiWS)                                | 德文    | 正面词、负面词；<br>                                         |
 | ChineseFinancialFormalUnformalSentiment.pkl       | 金融领域正式、非正式；积极消极                               | 中文    | formal-pos、<br>formal-neg；<br>unformal-pos、<br>unformal-neg |
-| ANEW.pkl                                          | 英语单词的情感规范Affective Norms for English Words (ANEW)   | 英文    |                                                              |
+| ANEW.pkl                                          | 英语单词的情感规范Affective Norms for English Words (ANEW)   | 英文    | pleasure, arousal, dominance                                 |
 | LSD2015.pkl                                       | Lexicoder Sentiment Dictionary (2015)                        | 英文    | 正面词、负面词                                               |
 | NRC.pkl                                           | NRC Word-Emotion Association Lexicon                         | 英文    | 细粒度情绪词；                                               |
 | geninqposneg.pkl                                  |                                                              |         |                                                              |
@@ -280,7 +282,7 @@ print(ct.load_pkl_dict('DUTIR.pkl'))
 Run
 
 ```
-1.7.7
+1.7.8
 
 {'DUTIR': {'哀': ['怀想', '治丝而棼', '伤害',...],
            '好': ['进贤黜奸', '清醇', '放达', ...],

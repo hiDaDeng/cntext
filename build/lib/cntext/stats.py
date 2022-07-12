@@ -196,7 +196,7 @@ def sentiment_by_valence(text, diction, lang='english'):
     calculate the occurrences of each sentiment category words in text;
     the complex influence of intensity adverbs and negative words on emotion is not considered.
     :param text:  text sring
-    :param diction:  sentiment dictionary with valence.；
+    :param diction:  sentiment dictionary dataframe with valence.；
     :param lang: "chinese" or "english"; default lang="english"
 
     :return:
@@ -233,6 +233,49 @@ def sentiment_by_valence(text, diction, lang='english'):
     return res
 
 
+def sentiment_by_weight(text, diction, params, lang='english'):
+    """
+    calculate the occurrences of each sentiment category words in text;
+    the complex influence of intensity adverbs and negative words on emotion is not considered.
+    :param text:  text sring
+    :param diction:  sentiment dictionary dataframe with weight.；
+    :param params:  set sentiment category weight, such as params=['valence', 'arousal']
+    :param lang: "chinese" or "english"; default lang="english"
+
+    :return:
+    """
+    result = dict()
+    for param in params:
+        result[param]=0
+
+
+    def query_word(word, df, param):
+        """
+        query
+        """
+        try:
+            return df[df["word"] == word][param].values[0]
+        except:
+            return 0
+
+    if lang == 'chinese':
+        words = list(jieba.cut(text))
+        for word in words:
+            try:
+                score += query_word(word=word, df=diction)
+            except:
+                score += 0
+
+    else:
+        rgx = re.compile("(?:(?:[^a-zA-Z]+')|(?:'[^a-zA-Z]+))|(?:[^a-zA-Z']+)")
+        words = re.split(rgx, text)
+        for word in words:
+            try:
+                for param in params:
+                    result[param] += query_word(word=word, df=diction, param=param)
+            except:
+                pass
+    return result
 
 
 

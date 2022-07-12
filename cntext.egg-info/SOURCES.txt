@@ -14,6 +14,7 @@ cntext.egg-info/top_level.txt
 cntext/files/ADV_CONJ.pkl
 cntext/files/AFINN.pkl
 cntext/files/ANEW.pkl
+cntext/files/ChineseEmoBank.pkl
 cntext/files/ChineseFinancialFormalUnformalSentiment.pkl
 cntext/files/Chinese_Loughran_McDonald_Financial_Sentiment.pkl
 cntext/files/Concreteness.pkl
@@ -24,5 +25,5 @@ cntext/files/LSD2015.pkl
 cntext/files/Loughran_McDonald_Financial_Sentiment.pkl
 cntext/files/NRC.pkl
 cntext/files/STOPWORDS.pkl
+cntext/files/SentiWS.pkl
 cntext/files/geninqposneg.pkl
-cntext/files/sentiws.pkl
