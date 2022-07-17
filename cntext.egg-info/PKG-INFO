@@ -1,3 +1,17 @@
+Metadata-Version: 2.1
+Name: cntext
+Version: 1.7.9
+Summary: Chinese text analysis library, which can perform word frequency statistics, dictionary expansion, sentiment analysis, similarity, readability, co-occurrence analysis, social calculation (attitude, prejudice, culture) on texts
+Home-page: https://github.com/hidadeng/cntext
+Author: 大邓
+Author-email: thunderhit@qq.com
+License: MIT
+Keywords: chinese,text mining,sentiment,sentiment analysis,natural language processing,sentiment dictionary development,text similarity
+Platform: UNKNOWN
+Requires-Python: >=3.5
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
 [toc]
 
 ![](img/logo.png)
@@ -830,4 +844,6 @@ If you use **cntext** in your research or in your project, please cite:
   year={2022}
 }
 ```
+
+
 
