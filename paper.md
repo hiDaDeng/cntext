@@ -74,10 +74,11 @@ basic text information
 
 **dictionary.py**
 
- build and extend dictionary(vocabulary)
+ build text model & expand dictionary(vocabulary)
 
   -  throught Sopmi(mutual information) algorithm
   -  expand dictionary throught Word2Vec algorithm
+  -  build Glove model
 
 **similarity.py  **
 
