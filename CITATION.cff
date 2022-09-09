@@ -31,16 +31,3 @@ keywords:
 license: MIT
 version: 1.7.9
 date-released: '2022-09-09'
-=======
-cff-version: 1.2.0
-message: "If you use this software, please cite it as below."
-authors:
-  - family-names: Deng
-    given-names: Xudong
-  - family-names: Peng
-    given-names: Nan
-title: "cntext: a Python tool for text mining"
-version: 1.7.9
-doi: 10.5281-zenodo.7063523
-date-released: 2022-09-09
->>>>>>> 56293f79caf805eec70850c82e3c4ca27860c022
