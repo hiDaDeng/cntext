@@ -822,12 +822,37 @@ Regarding the perception of size, humans have implied in the text that mice are 
 If you use **cntext** in your research or in your project, please cite:
 
 
+### apalike
 ```
-@misc{dengcntext,
-  title={cntext},
-  author={Xudong Deng and Nan Peng},
-  howpublished={\url{https://github.com/hidadeng/cntext}},
-  year={2022}
+Deng X., Nan P. (2022). cntext: a Python tool for text mining (version 1.7.9). DOI: 10.5281/zenodo.7063523 URL: https://github.com/hiDaDeng/cntext
+```
+
+### bibtex
+
+```
+@misc{YourReferenceHere,
+author = {Deng, Xudong and Nan, Peng},
+doi = {10.5281/zenodo.7063523},
+month = {9},
+title = {cntext: a Python tool for text mining},
+url = {https://github.com/hiDaDeng/cntext},
+year = {2022}
 }
 ```
 
+### endnote
+
+```
+%0 Generic
+%A Deng, Xudong
+%A Nan, Peng
+%D 2022
+%K text mining
+%K text analysi
+%K social science
+%K management science
+%K semantic analysis
+%R 10.5281/zenodo.7063523
+%T cntext: a Python tool for text mining
+%U https://github.com/hiDaDeng/cntext
+```
