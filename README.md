@@ -19,37 +19,8 @@
 
 - [pypi link](https://pypi.org/project/cntext/)  ``https://pypi.org/project/cntext/``
 
-  
 
-
-
-Functional modules include
-
-- [x] **stats.py**  basic text information
-  
-  - [x] word count
-  - [x] readability
-  - [x] built-in dictionary 
-  - [x] sentiment analysis
-  
-- [x] **dictionary.py** build and extend dictionary(vocabulary)
-  
-  - [x] throught Sopmi(mutual information) algorithm
-  - [x] expand dictionary throught Word2Vec algorithm
-  - [x] Glove Glove embeddings model
-  
-- [x] **similarity.py**   document similarity
-  
-  - [x] cosine algorithm
-  - [x] jaccard algorithm
-  - [x] edit distance algorithm
-  
-- [x] **mind.py**  digest cognitive(attitude、bias etc.) information
-
-  - [x] tm.semantic_distance
-  - [x] tm.semantic_projection
-
-   
+ 
 
 
 

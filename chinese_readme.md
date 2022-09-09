@@ -1,4 +1,5 @@
-[toc]
+<!-- START doctoc -->
+<!-- END doctoc -->
 
 # ![](img/logo.png)
 
