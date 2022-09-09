@@ -13,7 +13,7 @@
   - [1.3 dict_pkl_list](#13-dict_pkl_list)
   - [1.4 load_pkl_dict](#14-load_pkl_dict)
   - [1.5 sentiment](#15-sentiment)
-- [1.6 sentiment_by_valence()](#16-sentiment_by_valence)
+  - [1.6 sentiment_by_valence()](#16-sentiment_by_valence)
 - [2. dictionary](#2-dictionary)
   - [2.1 SoPmi](#21-sopmi)
   - [2.2 W2VModels](#22-w2vmodels)
