@@ -1,8 +1,35 @@
 [![DOI](https://zenodo.org/badge/487297608.svg)](https://zenodo.org/badge/latestdoi/487297608)
 
 
-<!-- START doctoc -->
-<!-- END doctoc -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**
+
+- [Installation](#installation)
+- [QuickStart](#quickstart)
+- [1. Basic](#1-basic)
+  - [1.1  readability](#11--readability)
+  - [1.2  term_freq(text, lang)](#12--term_freqtext-lang)
+  - [1.3 dict_pkl_list](#13-dict_pkl_list)
+  - [1.4 load_pkl_dict](#14-load_pkl_dict)
+  - [1.5 sentiment](#15-sentiment)
+- [1.6 sentiment_by_valence()](#16-sentiment_by_valence)
+- [2. dictionary](#2-dictionary)
+  - [2.1 SoPmi](#21-sopmi)
+  - [2.2 W2VModels](#22-w2vmodels)
+  - [Note](#note)
+  - [2.3 co_occurrence_matrix](#23-co_occurrence_matrix)
+  - [2.4  Glove](#24--glove)
+- [3. similarity](#3-similarity)
+- [4. Text2Mind](#4-text2mind)
+  - [4.1 tm.sematic_distance(words, c_words1, c_words2)](#41-tmsematic_distancewords-c_words1-c_words2)
+  - [4.2 tm.sematic_projection(words, c_words1, c_words2)](#42-tmsematic_projectionwords-c_words1-c_words2)
+- [Citation](#citation)
+  - [apalike](#apalike)
+  - [bibtex](#bibtex)
+  - [endnote](#endnote)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 
 ![](img/logo.png)
