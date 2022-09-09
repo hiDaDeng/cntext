@@ -47,7 +47,7 @@
 - [pypi link](https://pypi.org/project/cntext/)  ``https://pypi.org/project/cntext/``
 
 
- 
+
 
 
 
@@ -360,7 +360,7 @@ Run
 
 
 
-## 1.6 sentiment_by_valence()
+### 1.6 sentiment_by_valence()
 
 **sentiment_by_valence(text, diction, lang='english')**
 
