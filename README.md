@@ -1,4 +1,4 @@
-[toc]
+[![DOI](https://zenodo.org/badge/487297608.svg)](https://zenodo.org/badge/latestdoi/487297608)
 
 ![](img/logo.png)
 
