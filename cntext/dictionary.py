@@ -266,10 +266,11 @@ class W2VModels(object):
 
 
 
-    def train(self, input_txt_file, vector_size=100, min_count=5, ngram=False):
+    def train(self, input_txt_file, model_name='w2v.model', vector_size=100, min_count=5, ngram=False):
         """
         train word2vec model for corpus
         :param input_txt_file:  corpus file path
+        :param model_name:  used as model name(save)
         :param vector_size: dimensionality of the word vectors.
         :param min_count: Set the word to appear at least min_count times in the model
         :param ngram: whether to take the ngram case into account，default False
@@ -301,7 +302,7 @@ class W2VModels(object):
         modeldir = Path(self.cwd).joinpath('output', 'w2v_candi_words')
         Path(self.cwd).joinpath('output').mkdir(exist_ok=True)
         Path(self.cwd).joinpath('output', 'w2v_candi_words').mkdir(exist_ok=True)
-        modelpath = str(Path(modeldir).joinpath('w2v.model'))
+        modelpath = str(Path(modeldir).joinpath(model_name))
         self.model.wv.save(modelpath)
 
 
@@ -488,9 +489,11 @@ class Glove(object):
         return self.glove_embeddings
 
 
-    def save(self):
+    def save(self, model_name='glove_model'):
         """
         Save glove embeddings as a txt file. Note we will use gensim to convert the glove embeddings in word2vec format
+
+        :params model_name: txt file name; save the glove model to txt file.
         :return:
         """
 
@@ -498,8 +501,8 @@ class Glove(object):
         from gensim.scripts.glove2word2vec import glove2word2vec
         txtdir = Path(self.cwd).joinpath('output', 'Glove')
         Path(self.cwd).joinpath('output', 'Glove').mkdir(exist_ok=True)
-        glove_file = Path(txtdir).joinpath('{}_glove.txt'.format(self.glove_output_name))
-        w2v_file = Path(txtdir).joinpath('{}_w2v.txt'.format(self.glove_output_name))
+        glove_file = Path(txtdir).joinpath('{}_gl.txt'.format(self.glove_output_name))
+        w2v_file = Path(txtdir).joinpath('{}_w2v.txt'.format(model_name))
         with open(glove_file, 'a+', encoding='utf-8') as f:
             res_text = ''
             for glove_embedding in self.glove_embeddings:
@@ -509,6 +512,10 @@ class Glove(object):
 
         import os
         os.remove(glove_file)
+
+
+
+
 
 
 
