@@ -501,17 +501,13 @@ class Glove(object):
         from gensim.scripts.glove2word2vec import glove2word2vec
         txtdir = Path(self.cwd).joinpath('output', 'Glove')
         Path(self.cwd).joinpath('output', 'Glove').mkdir(exist_ok=True)
-        glove_file = Path(txtdir).joinpath('{}_gl.txt'.format(self.glove_output_name))
-        w2v_file = Path(txtdir).joinpath('{}_w2v.txt'.format(model_name))
+        glove_file = Path(txtdir).joinpath('{}.txt'.format(model_name))
         with open(glove_file, 'a+', encoding='utf-8') as f:
             res_text = ''
             for glove_embedding in self.glove_embeddings:
                 res_text += ' '.join(glove_embedding) + '\n'
             f.write(res_text)
-        glove2word2vec(glove_file, w2v_file)
 
-        import os
-        os.remove(glove_file)
 
 
 

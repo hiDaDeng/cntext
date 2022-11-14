@@ -1,4 +1,4 @@
-__version__ = "1.8.0"
+__version__ = "1.8.1"
 
 from cntext.dictionary import SoPmi, W2VModels, co_occurrence_matrix, Glove
 from cntext.similarity import jaccard_sim, minedit_sim, simple_sim, cosine_sim

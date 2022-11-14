@@ -3,7 +3,8 @@ from numpy import dot
 from numpy.linalg import norm
 from time import time
 from gensim.models.keyedvectors import KeyedVectors
-
+import scipy.spatial.distance
+import itertools
 
 class Text2Mind(object):
     """
@@ -16,10 +17,10 @@ class Text2Mind(object):
         """
         print('Loading the model of {}'.format(w2v_model_path))
         start = time()
-        
-        self.model = KeyedVectors.load_word2vec_format(w2v_model_path,
-                                                       binary=False,
-                                                       unicode_errors='ignore')
+        try:
+            self.model = KeyedVectors.load_word2vec_format(w2v_model_path, binary=False, no_header=True)
+        except:
+            self.model = KeyedVectors.load_word2vec_format(w2v_model_path)
         duration = round(time()-start, 2)
         print('Load successfully, used {} s'.format(duration))
 
@@ -35,6 +36,7 @@ class Text2Mind(object):
         get word vector
         """
         return self.model.get_vector(word)
+
 
 
     def __get_centroid(self, words):
@@ -99,6 +101,34 @@ class Text2Mind(object):
         dist_2 = np.linalg.norm(any_vector - c_vector2)
         res = dist_1-dist_2
         return round(res, 2)
+
+
+    def divergent_association_task(words, minimum=7):
+        """Compute DAT score, get the detail of algorithm, please refer to Olson, J. A., Nahas, J., Chmoulevitch, D., Cropper, S. J., & Webb, M. E. (2021). Naming unrelated words predicts creativity. Proceedings of the National Academy of Sciences, 118(25), e2022340118."""
+        # Keep only valid unique words
+        uniques = []
+        for word in words:
+            try:
+                self.model.get_vector(word)
+                uniques.append(word)
+            except:
+                pass
+    
+
+        # Keep subset of words
+        if len(uniques) >= minimum:
+            subset = uniques[:minimum]
+        else:
+            return None # Not enough valid words
+
+        # Compute distances between each pair of words
+        distances = []
+        for word1, word2 in itertools.combinations(subset, 2):
+            dist = scipy.spatial.distance.cosine(self.model.get_vector(word1), self.model.get_vector(word2))
+            distances.append(dist)
+
+        # Compute the DAT score (average semantic distance multiplied by 100)
+        return (sum(distances) / len(distances)) * 100
 
 
 
