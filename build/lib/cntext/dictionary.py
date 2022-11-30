@@ -325,6 +325,15 @@ class W2VModels(object):
         self.similars_candidate_idxs = set(self.similars_candidate_idxs)
 
 
+    def save(self,  model_name='w2v_model'):
+        """
+        Save word embedding data into the txt file
+        """
+        txtdir = Path(self.cwd).joinpath('output', 'Word2Vec')
+        Path(self.cwd).joinpath('output', 'Word2Vec').mkdir(exist_ok=True)
+        w2v_file = Path(txtdir).joinpath('{}.txt'.format(model_name))
+        self.model.wv.save_word2vec_format(w2v_file)
+        
 
 
     def find(self, seedword_txt_file, topn=50):

@@ -59,7 +59,7 @@ def term_freq(text, lang='chinese'):
     :param language: "chinese" or "english"; default is "chinese"
     """
     if lang=='chinese':
-        text = ''.join(re.findall('[\u4e00-\u9fa5]+', text))
+        #text = ''.join(re.findall('[\u4e00-\u9fa5]+', text))
         words = list(jieba.cut(text))
         words = [w for w in words if w not in STOPWORDS_zh]
     else:
