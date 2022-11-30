@@ -10,7 +10,8 @@ setup(
     url='https://github.com/hidadeng/cntext',      # 包的主页
     packages=setuptools.find_packages(),
     package_data = {'':['files/*.pkl']}, 
-    install_requires=['jieba', 'numpy', 'mittens', 'scikit-learn==1.0', 'numpy==1.20.0', 'matplotlib', 'pyecharts', 'gensim==4.0.0', 'nltk'],
+    #install_requires=['jieba', 'numpy', 'mittens', 'scikit-learn==1.0', 'numpy==1.20.0', 'matplotlib', 'pyecharts', 'gensim==4.0.0', 'nltk'],
+    install_requires=['jieba', 'numpy', 'mittens', 'scikit-learn', 'numpy', 'matplotlib', 'pyecharts', 'gensim', 'nltk'],
     python_requires='>=3.5',
     license="MIT",
     keywords=['chinese', 'text mining', 'sentiment', 'sentiment analysis', 'natural language processing', 'sentiment dictionary development', 'text similarity'],

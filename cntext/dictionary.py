@@ -307,7 +307,6 @@ class W2VModels(object):
 
 
 
-
     def __search(self, seedword_txt_file, n=50):
         seedwords = [w for w in open(seedword_txt_file, encoding='utf-8').read().split('\n') if w!='']
         self.similars_candidate_idxs = [] #the candidate words of seedwords
