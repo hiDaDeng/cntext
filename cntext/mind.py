@@ -134,8 +134,6 @@ class Text2Mind(object):
 
 
 
-
-
 # class Alignment(object):
 #     def __init__(self):
 #         pass

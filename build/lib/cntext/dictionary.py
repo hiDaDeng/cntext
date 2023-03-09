@@ -266,12 +266,13 @@ class W2VModels(object):
 
 
 
-    def train(self, input_txt_file, model_name='w2v.model', vector_size=100, min_count=5, ngram=False):
+    def train(self, input_txt_file, model_name='w2v.model', vector_size=100, window_size=6, min_count=5, ngram=False):
         """
         train word2vec model for corpus
         :param input_txt_file:  corpus file path
         :param model_name:  used as model name(save)
         :param vector_size: dimensionality of the word vectors.
+        :param window_size: window size for word2vec
         :param min_count: Set the word to appear at least min_count times in the model
         :param ngram: whether to take the ngram case into account，default False
         :return:
@@ -298,7 +299,7 @@ class W2VModels(object):
             sentences = sents
 
         print('Step 2/4:...Train  word2vec model\n            used   {} s'.format(duration))
-        self.model = word2vec.Word2Vec(sentences, vector_size=vector_size, min_count=min_count, workers=multiprocessing.cpu_count())
+        self.model = word2vec.Word2Vec(sentences, vector_size=vector_size, window=window_size, min_count=min_count, workers=multiprocessing.cpu_count())
         modeldir = Path(self.cwd).joinpath('output', 'w2v_candi_words')
         Path(self.cwd).joinpath('output').mkdir(exist_ok=True)
         Path(self.cwd).joinpath('output', 'w2v_candi_words').mkdir(exist_ok=True)
@@ -370,7 +371,6 @@ class W2VModels(object):
         duration = int(time.time()-self.start)
         duration = round(duration, 2)
         print('Step 4/4 Finish! Used {duration} s'.format(duration=duration))
-
 
 
 
