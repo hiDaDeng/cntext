@@ -57,6 +57,9 @@
 
 ```
 pip install cntext
+pip install numpy==1.24.2
+pip install gensim==4.2.0
+pip install scikit-learn==1.1.2
 ```
 
 
