@@ -37,7 +37,7 @@
 ## 安装
 
 ```
-pip install cntext
+pip install cntext --upgrade
 pip install numpy==1.24.2
 pip install gensim==4.2.0
 pip install scikit-learn==1.1.2
@@ -259,7 +259,7 @@ Run
 | Chinese_Loughran_McDonald_Financial_Sentiment.pkl | 曾庆生, 周波, 张程, and 陈信元. "年报语调与内部人交易: 表里如一还是口是心非?." 管理世界 34, no. 09 (2018): 143-160. | 中文    | 正面、负面词                                                 |
 | Chinese_Digitalization.pkl |吴非,胡慧芷,林慧妍,任晓怡. 企业数字化转型与资本市场表现——来自股票流动性的经验证据[J]. 管理世界,2021,37(07):130-144+10. | 中文    | 基于这篇论文，构建了中文数字化词典，含人工智能技术、大数据技术、云计算技术、区块链技术、数字技术应用等关键词列表。                                               |
 | Loughran_McDonald_Financial_Sentiment.pkl         | Loughran, Tim, and Bill McDonald. "When is a liability not a liability? Textual analysis, dictionaries, and 10‐Ks." The Journal of finance 66, no. 1 (2011): 35-65. | 英文    | 金融LM情绪词典2018年版本，含七个词表，分别是Negative, Positive, Uncertainty, Litigious, StrongModal, WeakModal, Constraining |
-
+| Chinese_FLS.pkl | 许帅,邵帅,何贤杰.业绩说明会前瞻性信息对分析师盈余预测准确性的影响——信口雌黄还是言而有征[J].中国管理科学:1-15. | 中文 | 前瞻性词典集，含174个词语 |
 
 
 
