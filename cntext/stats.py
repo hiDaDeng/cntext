@@ -117,9 +117,9 @@ def readability(text, zh_advconj=None, lang='chinese'):
             for w in words:
                 if w in adv_conj_words:
                     adv_conj_num+=1
-            adv_conj_mum_per_sent.append(adv_conj_num)
+            adv_conj_num_per_sent.append(adv_conj_num)
         readability1 = np.mean(zi_num_per_sent)
-        readability2 = np.mean(adv_conj_mum_per_sent)
+        readability2 = np.mean(adv_conj_num_per_sent)
         readability3 = (readability1+readability2)*0.5
         return {'readability1': readability1,
                 'readability2': readability2,
