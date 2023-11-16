@@ -1,0 +1,12 @@
+jieba
+numpy
+mittens
+scikit-learn
+numpy
+matplotlib
+pyecharts
+gensim
+nltk
+pandas
+chardet
+h5py
