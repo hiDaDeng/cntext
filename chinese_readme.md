@@ -13,6 +13,10 @@
 
 
 
+到2023-11-20这一天， cntext的下载累积量达到36581人次。
+
+[![](img/cntext-stats.png)](https://www.pepy.tech/projects/cntext)
+
 功能模块含
 
 - [x] **stats**  文本统计指标

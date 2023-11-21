@@ -46,7 +46,9 @@
 
 - [pypi link](https://pypi.org/project/cntext/)  ``https://pypi.org/project/cntext/``
 
+By the day of 2023-11-20, the cumulative download volume of cntext reached 36581
 
+[![](img/cntext-stats.png)](https://www.pepy.tech/projects/cntext)
 
 
 
