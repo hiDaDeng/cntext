@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cntext"
-version = "1.8.8"
+version = "1.8.9"
 description = "Chinese text analysis library, which can perform word frequency statistics, dictionary expansion, sentiment analysis, similarity, readability, co-occurrence analysis, social computing (attitude, prejudice, culture) on texts"
 authors = ["DaDeng"]
 license = "MIT"
@@ -23,6 +23,7 @@ nltk = "^3.8"
 pandas = "^1.5.0"
 chardet = "^5.0.0"
 h5py = "^3.9.0"
+pdfdocx="^1.7"
 
 
 [build-system]
