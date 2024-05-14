@@ -43,13 +43,10 @@
 
 **cntext** 是一个文本分析包，提供基于词嵌入模型的语义距离和语义投影。 此外，cntext还提供了传统的方法，如字数统计、可读性、文档相似度、情感分析等。 
 
-- [github repo](https://github.com/hidadeng/cntext) ``https://github.com/hidadeng/cntext``
-- [pypi link](https://pypi.org/project/cntext/)  ``https://pypi.org/project/cntext/``
+[pepy网站](https://www.pepy.tech/projects/cntext) 统计，截止 2024-5-14, 累积下载量  45,305 。 目前分为
 
-根据 [pepy网站](https://www.pepy.tech/projects/cntext) 统计，截止 2024-5-14, 累积下载量  45,305 。 目前分为
-
-- 公开cntext1.x ， 免费， 已更新至1.9
-- 非公开cntext2.x， 付费，已更新至2.1.2。 cntext2.x新增了一些特色功能，感兴趣的可以点击阅读[博客: 文本分析库cntext2.x使用手册](https://textdata.cn/blog/2024-04-27-cntext2x-usage-tutorial/)
+- 公开cntext1.x ， 免费， 已更新至1.9； 作为公益性项目cntext1.x暂停维护
+- 非公开cntext2.x， 付费，已更新至2.1.2。 感兴趣的可以点击阅读[博客: 文本分析库cntext2.x使用手册](https://textdata.cn/blog/2024-04-27-cntext2x-usage-tutorial/)
 
 [![](img/cntext2.png)](https://textdata.cn/blog/2024-04-27-cntext2x-usage-tutorial/)
 
