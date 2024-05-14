@@ -1,41 +1,9 @@
 [![DOI](https://zenodo.org/badge/487297608.svg)](https://zenodo.org/badge/latestdoi/487297608)
 
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**
-
-- [Installation](#installation)
-- [QuickStart](#quickstart)
-- [1. Basic](#1-basic)
-  - [1.1  readability](#11--readability)
-  - [1.2  term_freq(text, lang)](#12--term_freqtext-lang)
-  - [1.3 dict_pkl_list](#13-dict_pkl_list)
-  - [1.4 load_pkl_dict](#14-load_pkl_dict)
-  - [1.5 sentiment](#15-sentiment)
-  - [1.6 sentiment_by_valence()](#16-sentiment_by_valence)
-- [2. dictionary](#2-dictionary)
-  - [2.1 SoPmi](#21-sopmi)
-  - [2.2 W2VModels](#22-w2vmodels)
-  - [Note](#note)
-  - [2.3 co_occurrence_matrix](#23-co_occurrence_matrix)
-  - [2.4  Glove](#24--glove)
-- [3. similarity](#3-similarity)
-- [4. Text2Mind](#4-text2mind)
-  - [4.1 tm.sematic_distance(words, c_words1, c_words2)](#41-tmsematic_distancewords-c_words1-c_words2)
-  - [4.2 tm.sematic_projection(words, c_words1, c_words2)](#42-tmsematic_projectionwords-c_words1-c_words2)
-- [Citation](#citation)
-  - [apalike](#apalike)
-  - [bibtex](#bibtex)
-  - [endnote](#endnote)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 
 ![](img/logo.png)
 
-
-[文本分析库cntext1.x文档](chinese_readme.md)
 
 [博客: 文本分析库cntext2.x使用手册](https://textdata.cn/blog/2024-04-27-cntext2x-usage-tutorial/)
 
@@ -53,9 +21,48 @@ By the day of 2023-11-20, the cumulative download volume of cntext reached 36581
 
 
 
+
+<!-- START doctoc -->
+<!-- END doctoc -->
+
+# ![](img/logo.png)
+
+[旧版cntext入口](version1.2.md)
+
+中文文本分析库，可对文本进行词频统计、词典扩充、情绪分析、相似度、可读性等
+
+- [github地址](https://github.com/hidadeng/cntext) ``https://github.com/hidadeng/cntext``
+- [pypi地址](https://pypi.org/project/cntext/)  ``https://pypi.org/project/cntext/``
+- [视频课-**Python网络爬虫与文本数据分析**](https://ke.qq.com/course/482241?tuin=163164df)
+
+
+
+到2023-11-20这一天， cntext的下载累积量达到36581人次。
+
+[![](img/cntext-stats.png)](https://www.pepy.tech/projects/cntext)
+
+功能模块含
+
+- [x] **stats**  文本统计指标
+  - [x] 词频统计
+  - [x] 可读性
+  - [x] 内置pkl词典
+  - [x] **情感分析**
+- [x] **dictionary** 构建词表(典)
+  - [x] Sopmi 互信息扩充词典法
+  - [x] W2Vmodels 词向量扩充词典法
+  - [x] Glove Glove词向量模型
+- [x] **similarity**   文本相似度
+  - [x] cos相似度
+  - [x] jaccard相似度
+  - [x] 编辑距离相似度
+- [x] **mind.py** 计算文本中的认知方向（态度、偏见）
+
+
+
 <br>
 
-## Installation
+## 安装
 
 ```
 pip install cntext --upgrade
@@ -85,7 +92,7 @@ NAME
     cntext
 
 PACKAGE CONTENTS
-    bias
+    mind
     dictionary
     similarity
     stats
@@ -97,43 +104,41 @@ PACKAGE CONTENTS
 
 
 
-## 1. Basic
+## 一、stats
 
-Currently, the built-in functions of stats.py are:
+目前stats内置的函数有
 
-- **readability()**  the readability of text, support Chinese and English
-- **term_freq()**  word count 
-- **dict_pkl_list()**  get the list of built-in dictionaries (pkl format) in cntext
-- **load_pkl_dict()**  load the pkl dictionary file
-- **sentiment()** sentiment analysis
-- **sentiment_by_valence()** valence sentiment analysis
+- **readability**  文本可读性
+- **term_freq** 词频统计函数
+- **dict_pkl_list**  获取cntext内置词典列表(pkl格式)
+- **load_pkl_dict** 导入pkl词典文件
+- **sentiment** 情感分析
+- 
 
 
 
 ```python
 import cntext as ct
 
-text = 'What a sunny day!'
+text = '如何看待一网文作者被黑客大佬盗号改文，因万分惭愧而停更。'
 
-
-diction = {'Pos': ['sunny', 'good'],
-           'Neg': ['bad', 'terrible'],
-           'Adv': ['very']}
-
-ct.sentiment(text=text,
-             diction=diction,
-             lang='english')
+ct.term_freq(text, lang='chinese')
 ```
 
 Run
 
 ```
-{'Pos_num': 1,
- 'Neg_num': 0,
- 'Adv_num': 0,
- 'stopword_num': 1,
- 'word_num': 5,
- 'sentence_num': 1}
+Counter({'看待': 1,
+         '网文': 1,
+         '作者': 1,
+         '黑客': 1,
+         '大佬': 1,
+         '盗号': 1,
+         '改文': 1,
+         '因':   1,
+         '万分': 1,
+         '惭愧': 1,
+         '停': 1})
 ```
 
 <br>
@@ -142,60 +147,86 @@ Run
 
 ### 1.1  readability
 
-The larger the indicator, the higher the complexity of the article and the worse the readability.
+文本可读性，指标越大，文章复杂度越高，可读性越差。
 
-**readability(text, lang='chinese')**
+readability(text, lang='chinese')
 
-- text:  text string
-- lang:  "chinese" or "english"，default is "chinese"
+- text: 文本字符串数据
+- lang: 语言类型，"chinese"或"english"，默认"chinese"
 
+**中文可读性 ** 算法参考自   
 
+> 徐巍,姚振晔,陈冬华.中文年报可读性：衡量与检验[J].会计研究,2021(03):28-44.
+>
+> - readability1 ---每个分句中的平均字数
+> - readability2  ---每个句子中副词和连词所占的比例
+> - readability3  ---参考Fog Index， readability3=(readability1+readability2)×0.5
+
+​             
+
+以上三个指标越大，都说明文本的复杂程度越高，可读性越差。
 
 ```python
-import cntext as ct
+text1 = '如何看待一网文作者被黑客大佬盗号改文，因万分惭愧而停更。'
 
-text = 'Committed to publishing quality research software with zero article processing charges or subscription fees.'
 
-ct.readability(text=text, 
-               lang='english')
+ct.readability(text1, lang='chinese')
 ```
 
 Run
 
 ```
-{'readability': 19.982}
+{'readability1': 28.0,
+ 'readability2': 0.15789473684210525,
+ 'readability3': 14.078947368421053}
 ```
 
 <br>
 
 
 
-### 1.2  term_freq(text, lang)
-
-Word count statistics function, return Counter type.
+句子中的符号变更会影响结果
 
 ```python
-import cntext as ct
-
-text = 'Committed to publishing quality research software with zero article processing charges or subscription fees.'
-
-ct.term_freq(text=text, lang='english')
+text2 = '如何看待一网文作者被黑客大佬盗号改文，因万分惭愧而停更。'
+ct.readability(text2, lang='chinese')
 ```
 
 Run
 
 ```
-Counter({'committed': 1, 
-         'publishing': 1, 
-         'quality': 1, 
-         'research': 1, 
-         'software': 1, 
-         'zero': 1, 
-         'article': 1, 
-         'processing': 1, 
-         'charges': 1, 
-         'subscription': 1, 
-         'fees.': 1})
+{'readability1': 27.0,
+ 'readability2': 0.16666666666666666,
+ 'readability3': 13.583333333333334}
+```
+
+<br><br>
+
+### 1.2  term_freq
+
+词频统计函数，返回Counter类型
+
+```python
+import cntext as ct 
+
+text = '如何看待一网文作者被黑客大佬盗号改文，因万分惭愧而停更。'
+
+ct.term_freq(text, lang='chinese')
+```
+
+Run
+
+```
+Counter({'看待': 1,
+         '网文': 1,
+         '作者': 1,
+         '黑客': 1,
+         '大佬': 1,
+         '盗号': 1,
+         '改文因': 1,
+         '万分': 1,
+         '惭愧': 1,
+         '停': 1})
 ```
 
 <br>
@@ -204,11 +235,12 @@ Counter({'committed': 1,
 
 ### 1.3 dict_pkl_list  
 
-get the list of built-in dictionaries (pkl format) in cntext
+获取cntext内置词典列表(pkl格式)
 
 ```python
 import cntext as ct
 
+# 获取cntext内置词典列表(pkl格式)
 ct.dict_pkl_list()
 ```
 
@@ -224,55 +256,62 @@ Run
  'ANEW.pkl',
  'LSD2015.pkl',
  'NRC.pkl',
+ 'ChineseEmoBank.pkl',
  'geninqposneg.pkl',
  'HuLiu.pkl',
  'AFINN.pkl',
- 'ChineseEmoBank.pkl',
  'ADV_CONJ.pkl',
  'Loughran_McDonald_Financial_Sentiment.pkl',
  'Chinese_Loughran_McDonald_Financial_Sentiment.pkl',
  'STOPWORDS.pkl']
 ```
 
-We list 12 pkl dictionary here, some of English dictionary listed below are organized from [quanteda.sentiment](https://github.com/quanteda/quanteda.sentiment)
+词典对应关系, 部分情感词典资料整理自 [quanteda.sentiment](https://github.com/quanteda/quanteda.sentiment)
 
-| pkl文件                                     | 词典                                                         | 语言            | 功能                                                         |
-| ------------------------------------------- | ------------------------------------------------------------ | --------------- | ------------------------------------------------------------ |
-| ChineseEmoBank.pkl                                   | Chinese Sentiment Dictionary, includes 「valence」「arousal」. In cntext, we only take Chinese valence-arousal words (CVAW, single word) into account, ignore CVAP, CVAS, CVAT. | Chinese         | valence, arousal|
-| DUTIR.pkl                                   | DUTIR                                                        | Chinese         | Seven categories of emotions: 哀, 好, 惊, 惧, 乐, 怒, 恶     |
-| HOWNET.pkl                                  | Hownet                                                       | Chinese         | Positive、Negative                                           |
-| SentiWS.pkl                      | SentimentWortschatz (SentiWS)                                | German         | Positive、Negative；<br>                              |
-| ChineseFinancialFormalUnformalSentiment.pkl | Chinese finance dictionary, contains formal、unformal、positive、negative | Chinese         | formal-pos、<br>formal-neg；<br>unformal-pos、<br>unformal-neg |
-| ANEW.pkl                                    | Affective Norms for English Words (ANEW)                     | English         |                                                       |
-| LSD2015.pkl                                 | Lexicoder Sentiment Dictionary (2015)                        | English         | Positive、Negative                                           |
-| NRC.pkl                                     | NRC Word-Emotion Association Lexicon                         | English         | fine-grained sentiment words;                                |
-| HuLiu.pkl                                   | Hu&Liu (2004)                                                | English         | Positive、Negative                                           |
-| AFINN.pkl                                   | Affective Norms for English Words                        | English         |                       |
-| ADV_CONJ.pkl                                | adverbial & conjunction                                      | Chinese         |                                                              |
-| STOPWORDS.pkl                               |                                                              | English&Chinese | stopwordlist                                                 |
-| Concreteness.pkl                            | Brysbaert, M., Warriner, A. B., & Kuperman, V. (2014). Concreteness ratings for 40 thousand generally known English word lemmas. Behavior Research Methods, 46, 904–911 | English         | word & concreateness score                                   |
-| Chinese_Loughran_McDonald_Financial_Sentiment.pkl | 曾庆生, 周波, 张程, and 陈信元. "年报语调与内部人交易: 表里如一还是口是心非?." 管理世界 34, no. 09 (2018): 143-160. | Chinese | 正面、负面词                                                 |
+| pkl文件                                           | 词典                                                         | 语言    | 功能                                                         |
+| ------------------------------------------------- | ------------------------------------------------------------ | ------- | ------------------------------------------------------------ |
+| ChineseEmoBank.pkl                                   | 中文情感词典，含``效价valence``和``唤醒度arousal``。在cntext中，我们只使用了CVAW词表(单词)，其他词典如CVAP, CVAS, CVAT没有纳入到ChineseEmoBank.pkl. | Chinese         | ``效价valence``和``唤醒度arousal`` |
+| DUTIR.pkl                                         | 大连理工大学情感本体库                                       | 中文    | 七大类情绪，``哀, 好, 惊, 惧, 乐, 怒, 恶``                   |
+| HOWNET.pkl                                        | 知网Hownet词典                                               | 中文    | 正面词、负面词                                               |
+| SentiWS.pkl                                       | SentimentWortschatz (SentiWS)                                | 德文    | 正面词、负面词；<br>                                         |
+| ChineseFinancialFormalUnformalSentiment.pkl       | 金融领域正式、非正式；积极消极                               | 中文    | formal-pos、<br>formal-neg；<br>unformal-pos、<br>unformal-neg |
+| ANEW.pkl                                          | 英语单词的情感规范Affective Norms for English Words (ANEW)   | 英文    | pleasure, arousal, dominance                                 |
+| LSD2015.pkl                                       | Lexicoder Sentiment Dictionary (2015)                        | 英文    | 正面词、负面词                                               |
+| NRC.pkl                                           | NRC Word-Emotion Association Lexicon                         | 英文    | 细粒度情绪词；                                               |
+| geninqposneg.pkl                                  |                                                              |         |                                                              |
+| HuLiu.pkl                                         | Hu&Liu (2004)正、负情感词典                                  | 英文    | 正面词、负面词                                               |
+| AFINN.pkl                                         | 尼尔森 (2011) 的“新 ANEW”效价词表                            | 英文    | 情感效价信息valence                                          |
+| ADV_CONJ.pkl                                      | 副词连词                                                     | 中文    |                                                              |
+| STOPWORDS.pkl                                     |                                                              | 中、英  | 停用词                                                       |
+| Concreteness.pkl                                  | Brysbaert, M., Warriner, A. B., & Kuperman, V. (2014). Concreteness ratings for 40 thousand generally known English word lemmas. Behavior Research Methods, 46, 904–911 | English | word & concreateness score                                   |
+| Chinese_Loughran_McDonald_Financial_Sentiment.pkl | 曾庆生, 周波, 张程, and 陈信元. "年报语调与内部人交易: 表里如一还是口是心非?." 管理世界 34, no. 09 (2018): 143-160. | 中文    | 正面、负面词                                                 |
 | Chinese_Digitalization.pkl |吴非,胡慧芷,林慧妍,任晓怡. 企业数字化转型与资本市场表现——来自股票流动性的经验证据[J]. 管理世界,2021,37(07):130-144+10. | 中文    | 基于这篇论文，构建了中文数字化词典，含人工智能技术、大数据技术、云计算技术、区块链技术、数字技术应用等关键词列表。                                               |
-| Loughran_McDonald_Financial_Sentiment.pkl         | Loughran, Tim, and Bill McDonald. "When is a liability not a liability? Textual analysis, dictionaries, and 10‐Ks." The Journal of finance 66, no. 1 (2011): 35-65. | English | Positive and Negative emotion words in the financial field。 Besides, in version of 2018, author add ``Uncertainty, Litigious, StrongModal, WeakModal, Constraining`` |
+| Loughran_McDonald_Financial_Sentiment.pkl         | Loughran, Tim, and Bill McDonald. "When is a liability not a liability? Textual analysis, dictionaries, and 10‐Ks." The Journal of finance 66, no. 1 (2011): 35-65. | 英文    | 金融LM情绪词典2018年版本，含七个词表，分别是Negative, Positive, Uncertainty, Litigious, StrongModal, WeakModal, Constraining |
 | Chinese_FLS.pkl | 许帅,邵帅,何贤杰.业绩说明会前瞻性信息对分析师盈余预测准确性的影响——信口雌黄还是言而有征[J].中国管理科学:1-15. | 中文 | 前瞻性词典集，含174个词语 |
 
 
 
 
 
+### 注意:
+
+- 如果用户情绪分析时使用DUTIR词典发表论文，请在论文中添加诸如“使用了大连理工大学信息检索研究室的情感词汇本体” 字样加以声明。参考文献中加入引文“徐琳宏,林鸿飞,潘宇,等.情感词汇本体的构造[J]. 情报学报, 2008, 27(2): 180-185.” 
+
+
+- 如果大家有制作的词典，可以上传至百度网盘，并在issue中留下词典的网盘链接。如词典需要使用声明，可连同文献出处一起issue
 
 <br>
 
 ### 1.4 load_pkl_dict 
 
-load the pkl dictionary file and return dict type data.
+导入pkl词典文件，返回字典样式数据。
 
 ```python
 import cntext as ct
 
 print(ct.__version__)
-# load the pkl dictionary file
-print(ct.load_pkl_dict('NRC.pkl'))
+# 导入pkl词典文件,
+print(ct.load_pkl_dict('DUTIR.pkl'))
 ```
 
 Run
@@ -280,15 +319,17 @@ Run
 ```
 1.8.0
 
-{'NRC': {'anger': ['abandoned', 'abandonment', 'abhor', 'abhorrent', ...],
-         'anticipation': ['accompaniment','achievement','acquiring', ...],
-         'disgust': ['abject', 'abortion', 'abundance', 'abuse', ...],
-         'fear': ['anxiety', 'anxious', 'apache', 'appalling', ...],
-         ......
+{'DUTIR': {'哀': ['怀想', '治丝而棼', '伤害',...],
+           '好': ['进贤黜奸', '清醇', '放达', ...],
+           '惊': ['惊奇不已', '魂惊魄惕', '海外奇谈',...],
+           '惧': ['忸忸怩怩', '谈虎色变', '手忙脚乱',...],
+           '乐': ['神采', '喜人', '如意',...],
+           '怒': ['饮恨吞声', '扬眉瞬目',...],
+           '恶': ['出逃', '鱼肉百姓', '移天易日',...]},
  
- 'Desc': 'NRC Word-Emotion Association Lexicon', 
- 'Referer': 'Mohammad, Saif M., and Peter D. Turney. "Nrc emotion lexicon." National Research Council, Canada 2 (2013).'
-         }
+ 'Desc': '大连理工大学情感本体库，细粒度情感词典。含七大类情绪，依次是哀, 好, 惊, 惧, 乐, 怒, 恶',
+ 
+ 'Referer': '徐琳宏,林鸿飞,潘宇,等.情感词汇本体的构造[J]. 情报学报, 2008, 27(2): 180-185.'}
 ```
 
 <br>
@@ -297,112 +338,101 @@ Run
 
 ### 1.5 sentiment
 
-**sentiment(text, diction, lang='chinese')**
+sentiment(text, diction, lang='chinese')
+使用diy词典进行情感分析，计算各个情绪词出现次数; 未考虑强度副词、否定词对情感的复杂影响，
 
-Calculate the occurrences of each emotional category words in text; The complex influence of adverbs and negative words on emotion is not considered.
-
-- **text**:  text string
-- **diction**:  emotion dictionary data, support diy or built-in dicitonary
-- **lang**: "chinese" or "english"，default is "chinese"
-
-
-
-We can use built-in dicitonary in cntext, such as NRC.pkl
+- text:  待分析中文文本
+- diction:  情感词字典；
+- lang: 语言类型，"chinese"或"english"，默认"chinese"
 
 ```python
 import cntext as ct
 
-text = 'What a happy day!'
+text = '我今天得奖了，很高兴，我要将快乐分享大家。'
 
 ct.sentiment(text=text,
-             diction=ct.load_pkl_dict('NRC.pkl')['NRC'],
-             lang='english')
+             diction=ct.load_pkl_dict('DUTIR.pkl')['DUTIR'],
+             lang='chinese')
 ```
 
 Run
 
 ```
-{'anger_num': 0,
- 'anticipation_num': 1,
- 'disgust_num': 0,
- 'fear_num': 0,
- 'joy_num': 1,
- 'negative_num': 0,
- 'positive_num': 1,
- 'sadness_num': 0,
- 'surprise_num': 0,
- 'trust_num': 1,
- 'stopword_num': 1,
- 'word_num': 5,
+{'哀_num': 0,
+ '好_num': 0,
+ '惊_num': 0,
+ '惧_num': 0,
+ '乐_num': 2,
+ '怒_num': 0,
+ '恶_num': 0,
+ 'stopword_num': 8,
+ 'word_num': 14,
  'sentence_num': 1}
 ```
 
-We can also use DIY dicitonary, just like
+如果不适用pkl词典，可以自定义自己的词典，例如
 
 ```python
-import cntext as ct
+diction = {'pos': ['高兴', '快乐', '分享'],
+           'neg': ['难过', '悲伤'],
+           'adv': ['很', '特别']}
 
-text = 'What a happy day!'
-
-diction = {'Pos': ['happy', 'good'],
-           'Neg': ['bad', 'terrible'],
-           'Adv': ['very']}
-
-ct.sentiment(text=text,
-             diction=diction,
-             lang='english')
+text = '我今天得奖了，很高兴，我要将快乐分享大家。'
+ct.sentiment(text=text, 
+             diction=diction, 
+             lang='chinese')
 ```
 
 Run
 
 ```
-{'Pos_num': 1,
- 'Neg_num': 0,
- 'Adv_num': 0,
- 'stopword_num': 1,
- 'word_num': 5,
+{'pos_num': 3,
+ 'neg_num': 0,
+ 'adv_num': 1,
+ 'stopword_num': 8,
+ 'word_num': 14,
  'sentence_num': 1}
 ```
 
 <br>
 
-
-
 ### 1.6 sentiment_by_valence()
+sentiment函数默认所有情感词权重均为1，只需要统计文本中情感词的个数，即可得到文本情感得分。
 
-**sentiment_by_valence(text, diction, lang='english')**
+sentiment_by_valence(text, diction, lang='english')函数考虑了词语的效价(valence)
 
-Calculate the occurrences of each sentiment category words in text;  The complex influence of intensity adverbs and negative words on emotion is not considered.
+- text 待输入文本
+- diction 带效价的词典，DataFrame格式。
+- lang 语言类型'chinese' 或 'english'，默认'english'
 
-- text:  text sring
-- diction:  sentiment dictionary with valence.；
-- lang: "chinese" or "english"; default language="english"
-
-
-
-Here we want to study the concreteness of text.  The **concreteness.pkl** that comes from Brysbaert2014. 
+这里我们以文本具体性度量为例， **concreteness.pkl** 整理自 Brysbaert2014的文章。
 
 >Brysbaert, M., Warriner, A. B., & Kuperman, V. (2014). Concreteness ratings for 40 thousand generally known English word lemmas. Behavior Research Methods, 46, 904–911
 
 ```python
 import cntext as ct
 
-# load the concreteness.pkl dictionary file;  cntext version >=1.7.1
-concreteness_df = ct.load_pkl_dict('concreteness.pkl')['concreteness']
+# load the concreteness.pkl dictionary file
+concreteness_df = ct.load_pkl_dict('concreteness.pkl')
 concreteness_df.head()
 ```
 
 Run
 
-|| word | valence |
-| ---: | :-------------- | ----------: |
-|  0 | roadsweeper   |      4.85 |
-|  1 | traindriver   |      4.54 |
-|  2 | tush          |      4.45 |
-|  3 | hairdress     |      3.93 |
-|  4 | pharmaceutics |      3.77 |
+
+
+
+|      | word          | valence |
+| ---: | :------------ | ------: |
+|    0 | roadsweeper   |    4.85 |
+|    1 | traindriver   |    4.54 |
+|    2 | tush          |    4.45 |
+|    3 | hairdress     |    3.93 |
+|    4 | pharmaceutics |    3.77 |
 
 <br>
+
+先看一条文本的具体性度量
 
 ```python
 reply = "I'll go look for that"
@@ -422,6 +452,8 @@ Run
 
 
 <br>
+
+很多条文本的具体性度量
 
 ```python
 employee_replys = ["I'll go look for that",
@@ -457,29 +489,29 @@ Concreteness Score: 2.37 | Example-5: I'll go search for that t-shirt in grey
 
 
 
-<br><br>
+
+
+<br>
 
 
 
 
 
-## 2. dictionary
+## 二、dictionary
 
-This module is used to build or expand the vocabulary (dictionary), including
+本模块用于构建词表(典),含
 
-- **SoPmi** Co-occurrence algorithm to extend vocabulary (dictionary), Only support chinese
-- **W2VModels** using word2vec to extend vocabulary (dictionary), support english & chinese 
+- SoPmi 共现法扩充词表(典)
+- W2VModels 词向量word2vec扩充词表(典)
 
-### 2.1 SoPmi 
+### 2.1 SoPmi 共现法
 
 ```python
 import cntext as ct
 import os
 
 sopmier = ct.SoPmi(cwd=os.getcwd(),
-                   #raw corpus data，txt file.only support chinese data now.
-                   input_txt_file='data/sopmi_corpus.txt', 
-                   #muanually selected seed words
+                   input_txt_file='data/sopmi_corpus.txt',  #原始数据，您的语料
                    seedword_txt_file='data/sopmi_seed_words.txt', #人工标注的初始种子词
                    )   
 
@@ -500,20 +532,21 @@ Finish! used 44.49 s
 
 <br>
 
-### 2.2 W2VModels 
+### 2.2 W2VModels 词向量
 
-**In particular, note that the code needs to set the lang parameter**
+**特别要注意代码需要设定lang语言参数**
 
 ```python
 import cntext as ct
 import os
 
-#init W2VModels, corpus data w2v_corpus.txt
-model = ct.W2VModels(cwd=os.getcwd(), lang='english')  
+#初始化模型,需要设置lang参数。
+model = ct.W2VModels(cwd=os.getcwd(), 
+                     lang='english')  #语料数据 w2v_corpus.txt
 model.train(input_txt_file='data/w2v_corpus.txt')
 
 
-#According to the seed word, filter out the top 100 words that are most similar to each category words
+#根据种子词，筛选出没类词最相近的前100个词
 model.find(seedword_txt_file='data/w2v_seeds/integrity.txt', 
            topn=100)
 model.find(seedword_txt_file='data/w2v_seeds/innovation.txt', 
@@ -547,27 +580,26 @@ Step 4/4 Finish! Used 187 s
 
 <br>
 
-### Note
+### 需要注意
 
-When runing out the W2VModels, there will appear a file called **w2v.model**  in the directory of **output/w2v_candi_words**.Note this w2v file can be used later.
+训练出的w2v模型可以后续中使用。
 
 ```python
 from gensim.models import KeyedVectors
 
-w2v_model = KeyedVectors.load("the path of w2v.model")
-#to extract vector for word
+w2v_model = KeyedVectors.load(w2v.model路径)
+#找出word的词向量
 #w2v_model.get_vector(word)
-#if you need more information about the usage of w2_model, please use help function
+#更多w2_model方法查看
 #help(w2_model)
 ```
 
-For example, we load the ``output/w2v_candi_words/w2v.model`` 
+例如本代码，运行生成的结果路径``output/w2v_candi_words/w2v.model``
 
 ```python
 from gensim.models import KeyedVectors
 
 w2v_model = KeyedVectors.load('output/w2v_candi_words/w2v.model')
-# find the most similar word in w2v.model
 w2v_model.most_similar('innovation')
 ```
 
@@ -589,7 +621,7 @@ Run
 <br>
 
 ```python
-#to extract vector for "innovation"
+#获取词向量
 w2v_model.get_vector('innovation')
 ```
 
@@ -625,7 +657,7 @@ array([-0.45616838, -0.7799563 ,  0.56367606, -0.8570078 ,  0.600359  ,
 
 ### 2.3 co_occurrence_matrix
 
-generate word co-occurrence matrix
+词共现矩阵
 
 ```python
 import cntext as ct
@@ -642,13 +674,22 @@ ct.co_occurrence_matrix(documents,
 
 
 
+```python
+documents2 = ["编程很好玩",
+             "Python是最好学的编程"]
+
+ct.co_occurrence_matrix(documents2, 
+                        window_size=2, 
+                        lang='chinese')
+```
+
+![](img/co_occurrence2.png)
+
 <br><br>
-
-
 
 ### 2.4  Glove
 
-Build the Glove model for english corpus data. corpus file path is ``data/brown_corpus.txt``
+构建Glove词嵌入模型，使用英文数据``data/brown_corpus.txt``
 
 ```python
 import cntext as ct
@@ -671,22 +712,24 @@ Step 3/4: ...Train glove embeddings.
 Step 3/4: ... Finish! Use 175.98 s
 ```
 
-The generate生成的词嵌入模型文件位于output/Glove内
+生成的Glove词嵌入文件位于 ``output/Glove`` 。
 
-<br><br>
+<br>
+
+<br>
 
 
 
-## 3. similarity
+## 三、similarity
 
-Four text similarity functions
+四种相似度计算函数
 
-- **cosine_sim(text1, text2)**
-- **jaccard_sim(text1, text2)**   
-- **minedit_sim(text1, text2)**  
-- **simple_sim(text1, text2)** 
+- cosine_sim(text1, text2)  cos余弦相似
+- jaccard_sim(text1, text2)     jaccard相似
+- minedit_sim(text1, text2)  最小编辑距离相似度； 
+- simple_sim(text1, text2) 更改变动算法
 
-Algorithm implementation reference from ``Cohen, Lauren, Christopher Malloy, and Quoc Nguyen. Lazy prices. No. w25084. National Bureau of Economic Research, 2018.``
+算法实现参考自 ``Cohen, Lauren, Christopher Malloy, and Quoc Nguyen. Lazy prices. No. w25084. National Bureau of Economic Research, 2018.``
 
 
 
@@ -696,8 +739,8 @@ Algorithm implementation reference from ``Cohen, Lauren, Christopher Malloy, and
 import cntext as ct 
 
 
-text1 = 'Programming is fun!'
-text2 = 'Programming is interesting!'
+text1 = '编程真好玩编程真好玩'
+text2 = '游戏真好玩编程真好玩啊'
 
 print(ct.cosine_sim(text1, text2))
 print(ct.jaccard_sim(text1, text2))
@@ -708,54 +751,52 @@ print(ct.simple_sim(text1, text2))
 Run
 
 ```
+0.82
 0.67
-0.50
-1.00
-0.90
+2.00
+0.87
 ```
 
 <br><br>
 
-## 4. Text2Mind
+## 四、Text2Mind
 
-Word embeddings contain human cognitive information. 
+词嵌入中蕴含着人类的认知信息，以往的词嵌入大多是比较一个概念中两组反义词与某对象的距离计算认知信息。
 
-- **tm.sematic_distance(words, c_words1, c_words2)**  
-- **tm.sematic_projection(words, c_words1, c_words2)**  
+\- **多个对象在某概念的远近**，职业与性别，某个职业是否存在亲近男性，而排斥女性
+
+\- 多个对象在某**概念的分量(fen，一声)的多少**， 人类语言中留存着对不同动物体积的认知记忆，如小鼠大象。动物词在词向量空间中是否能留存着这种大小的记忆
+
+这两种认知分别可以用向量距离、向量语义投影计算得来。
+
+- tm.sematic_distance(words, c_words1, c_words2)  向量距离
+- tm.sematic_projection(words, c_words1, c_words2)  向量投影
 
 
 
 ### 4.1 tm.sematic_distance(words, c_words1, c_words2) 
 
-Calculate the two semantic distance， and return the difference between the two.
-
-- **words**   concept words, words = ['program', 'software', 'computer']
-- **c_words1**  concept words1,  c_words1 = ["man", "he", "him"]
-- **c_words2**  concept words2, c_words2 = ["woman", "she", "her"]
+分别计算words与c_words1、c_words2语义距离，返回距离差值。
 
 
 
-For example, 
+例如
 
 ```
 male_concept = ['male', 'man', 'he', 'him']
-
 female_concept = ['female', 'woman', 'she', 'her']
-
 software_engineer_concept  = ['engineer',  'programming',  'software']
-
 d1 = distance(male_concept,  software_engineer_concept)
-
 d2 = distance(female_concept,  software_engineer_concept)
 ```
 
-If d1-d2<0，it means in semantic space,  between man and woman, software_engineer_concept is more closer to male_concept。
+如果d1-d2<0，说明在语义空间中，software_engineer_concept更接近male_concept，更远离female_concept。
 
-In other words, there is a stereotype (bias) of women for software engineers in this corpus.
-
-[download glove_w2v.6B.100d.txt from google Driver](https://drive.google.com/file/d/1tuQB9PDx42z67ScEQrg650aDTYPz-elJ/view?usp=sharing) 
+换言之，在该语料中，人们对软件工程师这一类工作，对女性存在刻板印象(偏见)。
 
 
+
+**下载glove_w2v.6B.100d.txt**链接: https://pan.baidu.com/s/1MMfQ7M0YCzL9Klp4zrlHBw 提取码: 72l0 
 
 ```python
 import cntext as ct
@@ -764,13 +805,14 @@ import cntext as ct
 tm = ct.Text2Mind(w2v_model_path='glove_w2v.6B.100d.txt')
 
 engineer = ['program', 'software', 'computer']
-mans =  ["man", "he", "him"]
-womans = ["woman", "she", "her"]
+man_words =  ["man", "he", "him"]
+woman_words = ["woman", "she", "her"]
 
-
-tm.sematic_distance(words=animals, 
-                    c_words1=mans, 
-                    c_words2=womans)
+#在语义空间中，工程师更接近于男人，而不是女人。
+#in semantic space, engineer is closer to man, other than woman.
+tm.sematic_distance(words=engineer, 
+                    c_words1=man_words, 
+                    c_words2=woman_words)
 ```
 
 Run
@@ -779,35 +821,31 @@ Run
 -0.38
 ```
 
--0.38 means in semantic space, engineer is closer to man, other than woman.
-
 <br>
 
 ### 4.2 tm.sematic_projection(words, c_words1, c_words2) 
 
-To explain the semantic projection of the word vector model, I use the picture from a Nature paper in 2022[@Grand2022SemanticPR]. Regarding the names of animals, human cognition information about animal size is hidden in the corpus text. By projecting the meaning of **LARGE WORDS** and **SMALL WORDS** with the vectors of different **animals**, the projection of the animal on the **size vector**(just like the red line in the bellow picture) is obtained, so the size of the animal can be compared by calculation.
+为了解释词向量模型的语义投影，我使用了 2022 年 Nature 论文中的图片[@Grand2022SemanticPR]。 关于动物的名字，人类对动物大小的认知信息隐藏在语料库文本中。 通过将**LARGE WORDS** 和**SMALL WORDS**的含义用不同的**animals**的向量投影，动物在**size向量**上的投影（就像下图中的红线 ) 得到，因此可以通过计算比较动物的大小。
 
-Calculate the projected length of each word vector in the concept vector.Note that the calculation result reflects the direction of concept.**Greater than 0 means semantically closer to c_words2**.
+根据两组反义词c_words1, c_words2构建一个概念(认知)向量, words中的每个词向量在概念向量中投影，即可得到认知信息。
 
+分值越大，word越位于c_words2一侧。
 
-
-> Grand, G., Blank, I.A., Pereira, F. and Fedorenko, E., 2022. Semantic projection recovers rich human knowledge of multiple object features from word embeddings. _Nature Human Behaviour_, pp.1-13.
-
-
-
-
-
-
+> Grand, G., Blank, I.A., Pereira, F. and Fedorenko, E., 2022. Semantic projection recovers rich human knowledge of multiple object features from word embeddings. _Nature Human Behaviour_, pp.1-13."
 
 ![](img/Nature_Semantic_projection_recovering_human_knowledge_of.png)
 
-For example, in the corpus,  perhaps show that our human beings have different size memory(perception) about animals.
+例如，人类的语言中，存在尺寸、性别、年龄、政治、速度、财富等不同的概念。每个概念可以由两组反义词确定概念的向量方向。
+
+以尺寸为例，动物在人类认知中可能存在体积尺寸大小差异。 
 
 ```python
 animals = ['mouse', 'cat', 'horse',  'pig', 'whale']
-small_words = ["small", "little", "tiny"]
+small_words= ["small", "little", "tiny"]
 large_words = ["large", "big", "huge"]
 
+# In size conception, mouse is smallest, horse is biggest.
+# 在大小概念上，老鼠最小，马是最大的。
 tm.sematic_projection(words=animals, 
                       c_words1=small_words, 
                       c_words2=large_words)
@@ -823,14 +861,15 @@ Run
  ('horse', 0.4)]
 ```
 
-Regarding the perception of size, humans have implied in the text that mice are smaller and horses are larger.
+关于尺寸的认知，人类在文本中隐含着老鼠较小，马较大。
 
 <br><br>
 
 
 
-## Citation
-If you use **cntext** in your research or in your project, please cite:
+## 引用声明
+
+如果再研究或项目中使用到**cntext** ，请声明出处。
 
 
 ### apalike
@@ -867,3 +906,34 @@ year = {2022}
 %T cntext: a Python tool for text mining
 %U https://github.com/hiDaDeng/cntext
 ```
+
+
+<br><br>
+
+
+## 如果
+
+如果您是经管人文社科专业背景，编程小白，面临海量文本数据采集和处理分析艰巨任务，可以参看[《python网络爬虫与文本数据分析》](https://ke.qq.com/course/482241?tuin=163164df)视频课。作为文科生，一样也是从两眼一抹黑开始，这门课程是用五年时间凝缩出来的。自认为讲的很通俗易懂o(*￣︶￣*)o，
+
+- python入门
+- 网络爬虫
+- 数据读取
+- 文本分析入门
+- 机器学习与文本分析
+- 文本分析在经管研究中的应用
+
+感兴趣的童鞋不妨 戳一下[《python网络爬虫与文本数据分析》](https://m.qlchat.com/wechat/page/channel-intro?channelId=2000015158133596)进来看看~
+
+[![](img/pythonText.png)](https://ke.qq.com/course/482241?tuin=163164df)
+
+<br>
+
+## 更多
+
+- [B站:大邓和他的python](https://space.bilibili.com/122592901/channel/detail?cid=66008)
+- 公众号：大邓和他的python
+- [博客](https://hidadeng.github.io/)
+
+
+![](img/dadeng.png)
+
