@@ -12,8 +12,8 @@
 
 根据 [pepy网站](https://www.pepy.tech/projects/cntext) 统计，截止 2024-5-14, 累积下载量  45,305 。 目前分为
 
-- 公开cntext1.x ， 更新至1.9
-- 非公开cntext2.x， 需付费，已更新至2.1.2。 cntext新增了一些特色功能，感兴趣的可以点击阅读[博客: 文本分析库cntext2.x使用手册](https://textdata.cn/blog/2024-04-27-cntext2x-usage-tutorial/)
+- 公开cntext1.x ， 免费， 已更新至1.9
+- 非公开cntext2.x， 付费，已更新至2.1.2。 cntext新增了一些特色功能，感兴趣的可以点击阅读[博客: 文本分析库cntext2.x使用手册](https://textdata.cn/blog/2024-04-27-cntext2x-usage-tutorial/)
 
 [![](img/cntext2.png)](https://textdata.cn/blog/2024-04-27-cntext2x-usage-tutorial/)
 
