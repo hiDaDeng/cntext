@@ -2,6 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**
 
+- [English Docs](#english-docs)
 - [功能模块含](#%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97%E5%90%AB)
 - [安装](#%E5%AE%89%E8%A3%85)
 - [QuickStart](#quickstart)
