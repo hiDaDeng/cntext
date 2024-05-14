@@ -2,24 +2,23 @@
 
 
 
-![](img/logo.png)
 
+<br><br>
 
-[博客: 文本分析库cntext2.x使用手册](https://textdata.cn/blog/2024-04-27-cntext2x-usage-tutorial/)
-
-![](img/cntext2.png)
-
-**cntext** is a text analysis package that provides traditional text analysis methods, such as word count, readability, document similarity, sentiment analysis, etc. It has built-in multiple Chinese and English sentiment dictionaries. Supporting word embedding models training and usage, cntext provides semantic distance and semantic projection now.
+**cntext** 是一个文本分析包，提供基于词嵌入模型的语义距离和语义投影。 此外，cntext还提供了传统的方法，如字数统计、可读性、文档相似度、情感分析等。 
 
 - [github repo](https://github.com/hidadeng/cntext) ``https://github.com/hidadeng/cntext``
-
 - [pypi link](https://pypi.org/project/cntext/)  ``https://pypi.org/project/cntext/``
 
-By the day of 2023-11-20, the cumulative download volume of cntext reached 36581
+根据 [pepy网站](https://www.pepy.tech/projects/cntext) 统计，截止 2024-5-14, 累积下载量  45,305 。 目前分为
 
-[![](img/cntext-stats.png)](https://www.pepy.tech/projects/cntext)
+- 公开cntext1.x ， 更新至1.9
+- 非公开cntext2.x， 需付费，已更新至2.1.2。 cntext新增了一些特色功能，感兴趣的可以点击阅读[博客: 文本分析库cntext2.x使用手册](https://textdata.cn/blog/2024-04-27-cntext2x-usage-tutorial/)
+
+[![](img/cntext2.png)](https://textdata.cn/blog/2024-04-27-cntext2x-usage-tutorial/)
 
 
+<br><br>
 
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
