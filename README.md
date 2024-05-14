@@ -35,7 +35,7 @@
 [![DOI](https://zenodo.org/badge/487297608.svg)](https://zenodo.org/badge/latestdoi/487297608)
 
 
-[toc]
+
 
 
 <br><br>
@@ -928,18 +928,19 @@ year = {2022}
 
 ## 如果
 
-如果您是经管人文社科专业背景，编程小白，面临海量文本数据采集和处理分析艰巨任务，可以参看[《python网络爬虫与文本数据分析》](https://ke.qq.com/course/482241?tuin=163164df)视频课。作为文科生，一样也是从两眼一抹黑开始，这门课程是用五年时间凝缩出来的。自认为讲的很通俗易懂o(*￣︶￣*)o，
+如果您是经管人文社科专业背景，编程小白，面临海量文本数据采集和处理分析艰巨任务，可以参看 [《python实证指标构建与文本分析》]（https://textdata.cn/blog/management_python_course/) 视频课。作为文科生，一样也是从两眼一抹黑开始，这门课程是用五年时间凝缩出来的。自认为讲的很通俗易懂o(*￣︶￣*)o，
 
 - python入门
 - 网络爬虫
 - 数据读取
 - 文本分析入门
 - 机器学习与文本分析
+- 词嵌入与态度认知
 - 文本分析在经管研究中的应用
 
-感兴趣的童鞋不妨 戳一下[《python网络爬虫与文本数据分析》](https://m.qlchat.com/wechat/page/channel-intro?channelId=2000015158133596)进来看看~
+感兴趣的童鞋不妨 戳一下[《python实证指标构建与文本分析》]（https://textdata.cn/blog/management_python_course/)进来看看~
 
-[![](img/pythonText.png)](https://ke.qq.com/course/482241?tuin=163164df)
+[![](img/management_data_mining_with_python_course2.png)](https://textdata.cn/blog/management_python_course/)
 
 <br>
 
@@ -947,7 +948,7 @@ year = {2022}
 
 - [B站:大邓和他的python](https://space.bilibili.com/122592901/channel/detail?cid=66008)
 - 公众号：大邓和他的python
-- [博客](https://hidadeng.github.io/)
+- [博客](https://textdata.cn/)
 
 
 ![](img/dadeng.png)
