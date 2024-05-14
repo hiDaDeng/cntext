@@ -35,9 +35,11 @@
 ![](img/logo.png)
 
 
-[文本分析库cntext1.x使用手册](chinese_readme.md)
+[文本分析库cntext1.x文档](chinese_readme.md)
 
-[文本分析库cntext2.x(付费)使用手册](https://textdata.cn/blog/2024-04-27-cntext2x-usage-tutorial/)
+[博客: 文本分析库cntext2.x使用手册](https://textdata.cn/blog/2024-04-27-cntext2x-usage-tutorial/)
+
+![](img/cntext2.png)
 
 **cntext** is a text analysis package that provides traditional text analysis methods, such as word count, readability, document similarity, sentiment analysis, etc. It has built-in multiple Chinese and English sentiment dictionaries. Supporting word embedding models training and usage, cntext provides semantic distance and semantic projection now.
 
