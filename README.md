@@ -1,3 +1,37 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**
+
+- [功能模块含](#%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97%E5%90%AB)
+- [安装](#%E5%AE%89%E8%A3%85)
+- [QuickStart](#quickstart)
+- [一、stats](#%E4%B8%80stats)
+  - [1.1  readability](#11--readability)
+  - [1.2  term_freq](#12--term_freq)
+  - [1.3 dict_pkl_list](#13-dict_pkl_list)
+  - [注意:](#%E6%B3%A8%E6%84%8F)
+  - [1.4 load_pkl_dict](#14-load_pkl_dict)
+  - [1.5 sentiment](#15-sentiment)
+  - [1.6 sentiment_by_valence()](#16-sentiment_by_valence)
+- [二、dictionary](#%E4%BA%8Cdictionary)
+  - [2.1 SoPmi 共现法](#21-sopmi-%E5%85%B1%E7%8E%B0%E6%B3%95)
+  - [2.2 W2VModels 词向量](#22-w2vmodels-%E8%AF%8D%E5%90%91%E9%87%8F)
+  - [需要注意](#%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F)
+  - [2.3 co_occurrence_matrix](#23-co_occurrence_matrix)
+  - [2.4  Glove](#24--glove)
+- [三、similarity](#%E4%B8%89similarity)
+- [四、Text2Mind](#%E5%9B%9Btext2mind)
+  - [4.1 tm.sematic_distance(words, c_words1, c_words2)](#41-tmsematic_distancewords-c_words1-c_words2)
+  - [4.2 tm.sematic_projection(words, c_words1, c_words2)](#42-tmsematic_projectionwords-c_words1-c_words2)
+- [引用声明](#%E5%BC%95%E7%94%A8%E5%A3%B0%E6%98%8E)
+  - [apalike](#apalike)
+  - [bibtex](#bibtex)
+  - [endnote](#endnote)
+- [如果](#%E5%A6%82%E6%9E%9C)
+- [更多](#%E6%9B%B4%E5%A4%9A)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 [![DOI](https://zenodo.org/badge/487297608.svg)](https://zenodo.org/badge/latestdoi/487297608)
 
 
