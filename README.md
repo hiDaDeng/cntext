@@ -2,6 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**
 
+- [English Docs](#english-docs)
 - [功能模块含](#%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97%E5%90%AB)
 - [安装](#%E5%AE%89%E8%A3%85)
 - [QuickStart](#quickstart)
@@ -42,13 +43,10 @@
 
 **cntext** 是一个文本分析包，提供基于词嵌入模型的语义距离和语义投影。 此外，cntext还提供了传统的方法，如字数统计、可读性、文档相似度、情感分析等。 
 
-- [github repo](https://github.com/hidadeng/cntext) ``https://github.com/hidadeng/cntext``
-- [pypi link](https://pypi.org/project/cntext/)  ``https://pypi.org/project/cntext/``
+[pepy网站](https://www.pepy.tech/projects/cntext) 统计，截止 2024-7-16, 累积下载量  48,045 。 目前分为
 
-根据 [pepy网站](https://www.pepy.tech/projects/cntext) 统计，截止 2024-5-14, 累积下载量  45,305 。 目前分为
-
-- 公开cntext1.x ， 免费， 已更新至1.9
-- 非公开cntext2.x， 付费，已更新至2.1.2。 cntext新增了一些特色功能，感兴趣的可以点击阅读[博客: 文本分析库cntext2.x使用手册](https://textdata.cn/blog/2024-04-27-cntext2x-usage-tutorial/)
+- 公开cntext1.x ， 免费， 已更新至1.9；。
+- 非公开cntext2.x， 付费，已更新至2.1.3。 感兴趣的可以点击阅读[博客: 文本分析库cntext2.x使用手册](https://textdata.cn/blog/2024-04-27-cntext2x-usage-tutorial/)
 
 [![](img/cntext2.png)](https://textdata.cn/blog/2024-04-27-cntext2x-usage-tutorial/)
 
@@ -80,10 +78,12 @@
 ## 安装
 
 ```
-pip install cntext --upgrade
-pip install numpy==1.24.2
-pip install gensim==4.2.0
+pip install scipy==1.12
+pip install numpy==1.26.4
+pip install gensim==4.3.2
 pip install scikit-learn==1.1.2
+pip install pdfdocx
+pip install cntext --upgrade
 ```
 
 
