@@ -1,29 +1,27 @@
 [tool.poetry]
 name = "cntext"
-version = "1.8.9"
+version = "1.9.2"
 description = "Chinese text analysis library, which can perform word frequency statistics, dictionary expansion, sentiment analysis, similarity, readability, co-occurrence analysis, social computing (attitude, prejudice, culture) on texts"
 authors = ["DaDeng"]
 license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "3.11.5"
-
-
-[dependencies]
-python = "^3.5"
+python = "^3.10"
 jieba = "^0.4.1"
-numpy = "^1.21.0"
+numpy = "1.26.4"
 mittens = "^0.2"
-scikit-learn = "^1.3.0"
+scikit-learn = "1.1.2"
 matplotlib = "^3.6.0"
 pyecharts = "2.0.0"
-gensim = "^4.2.0"
+gensim = "4.3.2"
 nltk = "^3.8"
 pandas = "^1.5.0"
 chardet = "^5.0.0"
 h5py = "^3.9.0"
-pdfdocx="^1.7"
+pdfdocx="1.7"
+scipy = "1.12"
+
 
 
 [build-system]

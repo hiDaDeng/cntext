@@ -79,10 +79,8 @@ class Text2Mind(object):
         for word in words:
             any_vector = self.model.get_vector(word)
             projection_score = np.dot(any_vector, c_vector) / concept_norm
-            projection_scores.append(projection_score)
-        mean_projection_score = np.mean(projection_scores)
-        mean_projection_score = round(mean_projection_score, 2)
-        return mean_projection_score
+            projection_scores.append((word, round(projection_score, 2)))
+        return projection_scores
 
 
     def sematic_distance(self, words, c_words1, c_words2):
