@@ -78,12 +78,7 @@
 ## 安装
 
 ```
-pip install scipy==1.12
-pip install numpy==1.26.4
-pip install gensim==4.3.2
-pip install scikit-learn==1.1.2
-pip install pdfdocx
-pip install cntext --upgrade
+pip install cntext
 ```
 
 
