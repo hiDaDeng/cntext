@@ -400,15 +400,15 @@ sdf
 ct.read_files(fformat, encoding='utf-8'）
 ```
 
-批量读取符合 fformat 格式的所有文件数据，返回 DataFrame(含 doc 和 file 两个字段)。
+批量读取符合 fformat 格式的所有文件数据，返回 DataFrame(含 doc 和 file 两个字段)。支持的格式有pdf/docx/txt/xlsx/xls/csv。
 
 读取[文件夹 data 里所有 txt]
 
 ```python
 import cntext as ct
 
-#默认encoding='utf-8'
-#ddf = ct.read_files(fformat='data/*.txt')
+# 默认encoding='utf-8'
+# ddf = ct.read_files(fformat='data/*.txt')
 
 ddf = ct.read_files(fformat='data/*.txt', encoding='utf-8')
 ddf
@@ -453,14 +453,14 @@ Run
 
 <br>
 
-以[2001 年~2023 会计年度报告数据集](https://textdata.cn/blog/2023-03-23-china-a-share-market-dataset-mda-from-01-to-21/)为例， 查看 **_extract_mda_** 的抽取 mda 的能力。
+以[2001 年~2024 会计年度报告数据集](https://textdata.cn/blog/2023-03-23-china-a-share-market-dataset-mda-from-01-to-21/)为例， 查看 **_extract_mda_** 的抽取 mda 的能力。
 
 ```python
 import glob
 import cntext as ct
 
 print('extract_mda识别能力')
-for year in range(2001, 2024):
+for year in range(2001, 2025):
     num = 0
     for file in glob.glob(f'年报txt/{year}/*.txt'):
         mda_text = ct.extract_mda(open(file).read())
@@ -499,9 +499,13 @@ Run
 2021: 0.98
 2022: 0.99
 2023: 0.99
+2024: 0.99
 ```
 
-建议各位用最近 10 年的年报数据，通过 extract_mda 提取 mda 文本，或者直接购买 [数据集 | 2001-2023 年 A 股上市公司年报&管理层讨论与分析](数据集 | 2001-2023 年 A 股上市公司年报&管理层讨论与分析)
+建议各位用最近 10 年的年报数据，通过 extract_mda 提取 mda 文本，或者直接购买 [数据集 | 2001-2024 年 A 股上市公司年报&管理层讨论与分析](https://textdata.cn/blog/2023-03-23-china-a-share-market-dataset-mda-from-01-to-21/)
+
+
+
 
 <br>
 
