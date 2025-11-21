@@ -14,6 +14,8 @@
 | **_mind_** | `ct.sematic_projection(wv, words, poswords, negwords)` | 测量语义投影 |
 | **_mind_** | `ct.project_word(wv, a, b, cosine=False)` | 在向量空间中， 计算词语 a 在词语 b 上的投影。 |
 | **mind**  | `ct.project_text(wv, text, axis, lang='chinese', cosine=False)`  | 计算词语文本text在概念轴向量axis上的投影值|
+值|
+| **mind**  | `ct.wepa(wv, text, poswords, negwords, lang='chinese')`                                                                    | 计算文本在概念轴上的投影得分，返回wepa得分|
 | **_mind_** | `ct.sematic_distance(wv, words, c_words1, c_words2)` | 测量语义距离 |
 | **_mind_** | `ct.divergent_association_task(wv, words)` | 测量发散思维(创造力) |
 | **_mind_** | `ct.discursive_diversity_score(wv, words)` | 测量语言差异性(认知差异性) |

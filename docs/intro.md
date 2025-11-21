@@ -18,6 +18,7 @@ cntext 是专为**社会科学实证研究者**设计的中文文本分析 Pytho
    - 两行代码训练领域专用词向量（Word2Vec/GloVe）：``ct.Word2Vec()``
    - 构建概念语义轴（如“创新 vs 守旧”）：``ct.generate_concept_axis()``
    - 通过语义投影量化刻板印象、组织文化偏移：``ct.project_text()``
+   - 计算文本对应的词嵌入投影得分WEPA：``ct.wepa()``
 4. **融合大模型进行结构化分析**
    - 调用 LLM 对文本进行语义解析，返回结构化结果（如情绪维度、意图分类）：``ct.llm()``
 
@@ -61,7 +62,6 @@ cntext2.x 含io、model、stats、mind五个模块
 | ***model*** | ***ct.glove2word2vec(glove_file, word2vec_file)***                 | 将GLoVe模型.txt文件转化为Word2Vec模型.txt文件； 一般很少用到    |
 | ***model*** | ***ct.evaluate_similarity(wv, file=None)***                | 使用近义法评估模型表现，默认使用内置的数据进行评估。|
 | ***model*** | ***ct.evaluate_analogy(wv, file=None)***                | 使用类比法评估模型表现，默认使用内置的数据进行评估。|
-| ***model*** |  ***project_word(wv, a, b, weight=None)***    |  在向量空间中， 计算词语a在词语b上的投影。|
 | ***model*** | ***ct.load_w2v(wv_path)***                 | 读取cntext2.x训练出的Word2Vec/GloVe模型文件       |
 | ***model*** | ***ct.expand_dictionary(wv,  seeddict, topn=100)***            | 扩展词典,  结果保存到路径[output/Word2Vec]中 |
 | ***model*** | ***ct.SoPmi(corpus_file, seed_file, lang='chinese')***         | 共现法扩展词典                                   |
@@ -85,6 +85,7 @@ cntext2.x 含io、model、stats、mind五个模块
 | ***mind***  | ***ct.sematic_projection(wv, words, c_words1, c_words2)*** | 测量语义投影                                               |
 | ***mind***  | ***ct.project_word(wv, a, b)*** | 测量词语a在词语b上的投影语                                              |
 | **mind**  | ***ct.project_text(wv, text, axis, lang='chinese', cosine=False)***   | 计算词语文本text在概念轴向量axis上的投影值|
+| ***mind***  | ***ct.wepa(wv, text, poswords, negwords, lang='chinese')***  | 计算文本在概念轴上的投影得分，返回wepa得分|
 | ***mind***  | ***ct.sematic_distance(wv, words, c_words1, c_words2)*** | 测量语义距离                                               |
 | ***mind***  | ***ct.divergent_association_task(wv, words)***       | 测量发散思维(创造力)                                       |
 | ***mind***  | ***ct.discursive_diversity_score(wv, words)***       | 测量语言差异性(认知差异性)                                       |
