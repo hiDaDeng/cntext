@@ -3,7 +3,7 @@ import setuptools
 
 setup(
     name='cntext',     # 包名字
-    version='2.1.6',   # 包版本
+    version='2.2.1',   # 包版本
     description='Chinese text analysis library, which can perform word frequency statistics, dictionary expansion, sentiment analysis, similarity, readability, co-occurrence analysis, social computing (attitude, prejudice, culture) on texts',   # 简单描述
     author='大邓',  # 作者
     author_email='thunderhit@qq.com',  # 邮箱

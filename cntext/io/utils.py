@@ -1,5 +1,5 @@
 import chardet
-import pkg_resources
+from importlib import resources
 from opencc import OpenCC
 import ftfy
 import contractions
@@ -30,7 +30,8 @@ def get_cntext_path():
     """
     查看cntext的安装路径
     """
-    return pkg_resources.resource_filename('cntext', '')
+    with resources.path('cntext', '__init__.py') as p:
+        return p.parent
 
 
 

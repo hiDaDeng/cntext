@@ -41,17 +41,30 @@ def project_word(wv, a, b, cosine=False):
     
 def project_text(wv, text, axis, lang='chinese', cosine=False):
     """
-    在向量空间中，计算文本在概念轴向量上的投影值。
-    
+    Project a text onto a semantic axis.
+
+    The text is tokenized with cntext's lightweight preprocessing for the
+    selected language. Tokens that are not present in ``wv`` are ignored. The
+    returned value is the mean projection of all in-vocabulary tokens onto the
+    supplied axis. In WEPA applications, this value is interpreted as a
+    text-based indicator of construct-related linguistic salience along a
+    theory-defined semantic axis, not as a direct observation of a latent state.
+
     Args:
-        wv(KeyedVectors): 语言模型的KeyedVectors
-        text : 文本字符串
-        lang:  语言,有chinese和english两种; 默认"chinese"
-        axis:  概念向量
-        cosine (bool, optional): 投影值是否使用余弦相似度， 默认为False，返回text在axis上的投影值； True时，返回text与axis的余弦相似度。
+        wv (KeyedVectors): Embedding model or compatible object. It must
+            support membership checks and vector lookup by token.
+        text (str): Input text to score.
+        axis (numpy.ndarray or list or tuple): A semantic-axis vector. If a list
+            or tuple is provided, cntext uses ``wv.get_mean_vector(axis)``.
+        lang (str): Text preprocessing language. Supported values are
+            ``"chinese"`` and ``"english"``.
+        cosine (bool): If ``False``, return scalar projection length. If
+            ``True``, return cosine similarity to the axis.
 
     Returns:
-        float: 文本在概念轴上的投影值。如果无法计算，则返回 np.nan。
+        float: Mean projection score. Returns ``numpy.nan`` when the axis is
+        invalid, the axis is a zero vector, or no in-vocabulary text tokens are
+        available.
     """
     # 1. 检查概念轴向量的有效性
     if isinstance(axis, np.ndarray):
@@ -93,18 +106,45 @@ def project_text(wv, text, axis, lang='chinese', cosine=False):
         
 
 
+def _validate_anchor_pole(words, argument_name, pole_name):
+    if words is None:
+        raise ValueError(f"{argument_name} must contain at least one {pole_name} anchor word.")
+    try:
+        if len(words) == 0:
+            raise ValueError(f"{argument_name} must contain at least one {pole_name} anchor word.")
+    except TypeError as exc:
+        raise ValueError(f"{argument_name} must be a non-empty sequence of anchor words.") from exc
+
+
 def generate_concept_axis(wv, poswords, negwords):
     """
-    生成概念轴向量。
+    Construct a normalized semantic axis from positive and negative anchors.
 
-    参数:
-    - wv(KeyedVectors): 包含预训练的词向量。
-    - poswords(list): 第一个词语列表，表示概念的正义词。
-    - negwords(list): 第二个词语列表，表示概念的反义词。
+    This function implements the core semantic-axis step used by the Word
+    Embedding Projection Approach (WEPA). It averages vectors for the positive
+    pole anchor words, averages vectors for the negative pole anchor words, and
+    returns the normalized difference:
 
-    返回:
-    - concept_axis: 标准化后的概念轴向量，表示从概念2到概念1的方向。
+    ``mean(positive pole) - mean(negative pole)``.
+
+    Args:
+        wv (KeyedVectors): Embedding model or compatible object with
+            ``get_mean_vector``.
+        poswords (list): Non-empty list of positive pole anchor words.
+        negwords (list): Non-empty list of negative pole anchor words.
+
+    Returns:
+        numpy.ndarray: Unit-length semantic-axis vector pointing from the
+        negative pole toward the positive pole.
+
+    Raises:
+        ValueError: If either pole is missing or the resulting axis is a zero
+        vector. A zero vector usually means that the two poles are identical,
+        redundant, or unavailable in the embedding vocabulary.
     """
+    _validate_anchor_pole(poswords, "poswords", "positive pole")
+    _validate_anchor_pole(negwords, "negwords", "negative pole")
+
     # 计算两个概念的平均向量
     pos_vector = wv.get_mean_vector(poswords)
     neg_vector = wv.get_mean_vector(negwords)
@@ -408,20 +448,17 @@ def discursive_diversity_score(wv, words):
 ###########################WEPA#########################################
 
 
-# 为了能缓存numpy数组，需要先定义一个转换函数
-def _array_hash(arr):
-    """将numpy数组转换为可哈希的元组"""
-    return tuple(arr.flatten())
-
 # 使用类来管理缓存，避免修改numpy内置类型
 class ConceptAxisCache:
     def __init__(self):
         self.cache = {}
         
     def get_cached_axis(self, wv, poswords, negwords):
+        _validate_anchor_pole(poswords, "poswords", "positive pole")
+        _validate_anchor_pole(negwords, "negwords", "negative pole")
+
         # 创建缓存键
-        key = (_array_hash(wv.vectors[0]) if hasattr(wv, 'vectors') else id(wv), 
-               tuple(poswords), tuple(negwords))
+        key = (id(wv), tuple(poswords), tuple(negwords))
         
         # 检查缓存中是否存在
         if key not in self.cache:
@@ -437,18 +474,36 @@ _concept_axis_cache = ConceptAxisCache()
 
 def wepa(wv, text, poswords, negwords, lang='chinese', cosine=False):
     """
-    计算文本在概念轴上的投影得分（优化版，内部自动缓存概念轴）
-    
-    参数:
-        wv (KeyedVectors): 语言模型的KeyedVectors
-        text (str): 单个文本字符串
-        poswords (list): 正面词列表
-        negwords (list): 负面词列表
-        lang (str): 语言，支持'chinese'或'english'，默认为'chinese'
-        cosine (bool): 是否使用余弦相似度，默认为False
-    
-    返回:
-        float: wepa得分
+    Score a text with the Word Embedding Projection Approach (WEPA).
+
+    WEPA is a theory-driven semantic projection workflow. This convenience
+    function constructs a semantic axis from positive and negative anchor words,
+    caches that axis for repeated calls with the same embedding object and
+    anchors, cleans the input text, and projects the text onto the axis.
+
+    Scores indicate construct-related linguistic salience in text. They should
+    not be interpreted as direct measurements of latent psychological states,
+    clinical diagnoses, causal effects, or evidence of strict measurement
+    invariance across platforms.
+
+    Args:
+        wv (KeyedVectors): Embedding model or compatible object. It must support
+            vector lookup, membership checks, and ``get_mean_vector``.
+        text (str): Single user-generated text or document to score.
+        poswords (list): Non-empty positive pole anchor words for the construct.
+        negwords (list): Non-empty negative pole anchor words for the construct.
+        lang (str): Text preprocessing language. Supported values are
+            ``"chinese"`` and ``"english"``.
+        cosine (bool): If ``False``, use scalar projection length. If ``True``,
+            use cosine similarity between token vectors and the semantic axis.
+
+    Returns:
+        float: WEPA score for the text. ``numpy.nan`` is returned when no
+        in-vocabulary tokens can be scored.
+
+    Raises:
+        ValueError: If either anchor-word pole is empty or the semantic axis is
+        a zero vector.
     """
     # 计算概念轴（使用缓存机制）
     axis_vec = _concept_axis_cache.get_cached_axis(wv, poswords, negwords)

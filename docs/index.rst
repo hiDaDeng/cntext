@@ -21,6 +21,8 @@ cntext 是专为社会科学实证研究者设计的中文文本分析 Python �
    model.md
    embeddings.md
    mind.md
+   wepa.md
+   paper_reproducibility.md
    llm.md
    plot.md
    cite.md
@@ -28,4 +30,3 @@ cntext 是专为社会科学实证研究者设计的中文文本分析 Python �
 
 
    
-

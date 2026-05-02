@@ -439,15 +439,63 @@ Run
 
 
 
+<br>
+
+### 5.6 wepa()
+
+计算文本在概念轴上的投影得分，返回 WEPA 得分。WEPA 是 Word Embedding Projection Approach 的简称，可理解为一种理论驱动的语义投影流程。得分表示文本在理论定义语义轴上的构念相关语言显著性，不应被解释为潜在心理状态的直接观测、临床诊断、因果效应或跨平台严格测量不变性的证明。
+
+```
+ct.wepa(wv, text, poswords, negwords, lang='chinese', cosine=False)
+```
+
+- **wv** 模型数据， 数据类型为 gensim.models.keyedvectors.KeyedVectors。
+- **poswords、negwords** 确定概念轴的两极(端点)对应的词语列表
+- **lang (str)**: 语言，支持'chinese'或'english'，默认为'chinese'
+- **cosine (bool)**: 是否使用余弦相似度，默认为False
+
+```python
+import cntext as ct 
+
+# 加载已训练好的词嵌入模型(GloVe)
+M1 = ct.load_w2v("output/corpus-GloVe.200.15.bin")
+
+# 目标具体性正、负向词(部分)
+
+POSs = ["kg", "公斤", "体脂率", "bmi", "公里", "km", "小时", "分钟",...]
+NEGs = ["差不多", "大概", "变瘦", "变强", "变好", "变美", "变帅", "进步", ...]
+
+# 实验文本
+TEXTs = ["完成了3组卧推，每组10次，重量80kg。",
+         "今天跑步5公里，用了30分钟，消耗了400卡路里。",
+         "差不多就行了，今天有点累。",
+         "希望自己能变得更强。"]
+
+print("目标具体性得分: \n")
+for text in TEXTs:
+    proj_score = ct.wepa(wv=M1, text=text, poswords=POSs, negwords=NEGs)
+    print(proj_score, text)
+```
+
+Run
+
+```
+目标具体性得分:
+1.22 完成了3组卧推，每组10次，重量80kg。
+0.96 今天跑步5公里，用了30分钟，消耗了40...
+-0.17 差不多就行了，今天有点累。
+-1.42 希望自己能变得更强。
+```
 
 
+输出结果清晰地表明，在目标具体性维度上的语义差异：包含具体量化指标的文本（如 80kg、5 公里）获得高分， 而表达模糊意图的文本（如差不多、变强）则得分较低。
 
 
 
 
 <br>
 
-## 5.6 divergent_association_task()
+## 5.7 divergent_association_task()
 
 [PNAS | 使用语义距离测量一个人的创新力(发散思维)得分](https://textdata.cn/blog/2022-11-14-pnas_naming_unrelated_words_predicts_creativity/)。一些理论认为，有 创造力 的人能够产生更多 发散性 的想法。如果这是正确的，简单地让被试写 N 个不相关的单词，然后测量这 N 个词的语义距离， 作为发散思维的客观衡量标准。
 
@@ -484,7 +532,7 @@ Run
 
 <br>
 
-## 5.7 discursive_diversity_score()
+## 5.8 discursive_diversity_score()
 
 [MS2022 | 使用语言差异性测量团队认知差异性](https://textdata.cn/blog/2023-11-02-measure-cognitive-diversity-through-language-discursive-diversity/)
 
