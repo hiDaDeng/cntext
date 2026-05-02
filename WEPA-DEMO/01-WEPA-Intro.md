@@ -59,6 +59,9 @@ cntext provides the core building blocks needed for the WEPA workflow:
 The one-line scoring interface is:
 
 ```python
+import cntext as ct
+
+wv = ct.load_w2v('outputs/corpus-Word2Vec.200.15.bin')
 score = ct.wepa(
     wv=wv,
     text="今天完成了5公里跑步，坚持训练很有成就感。",

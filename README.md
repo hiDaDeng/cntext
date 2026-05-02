@@ -15,6 +15,11 @@ WEPA is a **theory-driven semantic projection workflow** for measuring construct
 In cntext, the shortest WEPA scoring path is one line:
 
 ```python
+import cntext as ct
+
+
+wv = ct.load_w2v('/path/Embeddings.bin')
+
 score = ct.wepa(
     wv=wv,
     text="I will persist and focus on this goal",
@@ -27,6 +32,9 @@ score = ct.wepa(
 This one-line call is equivalent to the expanded workflow:
 
 ```python
+import cntext as ct
+
+wv = ct.load_w2v('outputs/corpus-Word2Vec.200.15.bin')
 axis = ct.generate_concept_axis(
     wv=wv,
     poswords=["commit", "persist", "focus"],
